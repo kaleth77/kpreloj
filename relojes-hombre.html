@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relojes Hombre - KP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Relojes Hombre</h1>
+    <a class="volver" href="index.html">⬅ Volver al inicio</a>
+</header>
+
+<section class="productos">
+
+    <div class="card">
+        <img src="img/relojcurrenh1.jpg" onclick="abrirImagen(this)" alt="Reloj Elegante Negro con Rose Gold">
+        <h3>Reloj Elegante Negro con Rose Gold</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Elegante%20Negro%20Con%20Rose%20Gold"
+           target="_blank">
+           $105.000
+        </a>
+    </div>
+
+    <div class="card">
+        <img src="img/relojcurrenh2.jpg" onclick="abrirImagen(this)" alt="Reloj Elegante Azul con Rose Gold">
+        <h3>Reloj Elegante Azul con Rose Gold</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Elegante%20Azul%20Con%20Rose%20Gold"
+           target="_blank">
+           $105.000
+        </a>
+    </div>
+
+    <div class="card">
+        <img src="img/relojcurrenh3.jpg" onclick="abrirImagen(this)" alt="Reloj Elegante Negro">
+        <h3>Reloj Elegante Negro</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Elegante%20Negro"
+           target="_blank">
+           $105.000
+        </a>
+    </div>
+
+
+
+      <div class="card">
+        <img src="img/relojcurrenh5.jpg" onclick="abrirImagen(this)" alt="Reloj Negro con Dorado">
+        <h3>Reloj Negro con Dorado</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Negro%20con%20Dorado"
+           target="_blank">
+           $105.000
+        </a>
+    </div>
+
+      <div class="card">
+        <img src="img/relojcurrenh6.jpg" onclick="abrirImagen(this)" alt="Reloj Plateado fondo Negro">
+        <h3>Reloj Plateado fondo negro</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Plateado%20Fondo%20Negro"
+           target="_blank">
+           $105.000
+        </a>
+    </div>
+
+      <div class="card">
+        <img src="img/relojcurrenh7.jpg" onclick="abrirImagen(this)" alt="Reloj Plateado fondo Verde">
+        <h3>Reloj Plateado fondo Verde</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Plateado%20Fondo%20Verde"
+           target="_blank">
+           $105.000
+        </a>
+    </div>
+
+    
+      <div class="card">
+        <img src="img/relojcurrenh8.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Blanco">
+        <h3>Reloj Sinobi Blanco</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Sinobi%20Blanco"
+           target="_blank">
+           $130.000
+        </a>
+    </div>
+
+    
+      <div class="card">
+        <img src="img/relojcurrenh9.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Negro">
+        <h3>Reloj Sinobi Negro</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Sinobi%20Negro"
+           target="_blank">
+           $130.000
+        </a>
+    </div>
+
+    
+      <div class="card">
+        <img src="img/relojcurrenh10.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Verde">
+        <h3>Reloj Sinobi Verde</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Sinobi%20Verde"
+           target="_blank">
+           $130.000
+        </a>
+    </div>
+
+    
+      <div class="card">
+        <img src="img/relojcurrenh11.jpg" onclick="abrirImagen(this)" alt="RReloj Sinobi Azul">
+        <h3>Reloj Sinobi Azul</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Sinobi%20Azul"
+           target="_blank">
+           $130.000
+        </a>
+    </div>
+
+    
+      <div class="card">
+        <img src="img/relojcurrenh12.jpg" onclick="abrirImagen(this)" alt="Reloj foxBox Magnetico">
+        <h3>Reloj foxBox Magnetico</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20FoxBox%20Magnetico"
+           target="_blank">
+           $165.000
+        </a>
+    </div>
+
+</section>
+ <div id="visor" class="visor">
+  <span onclick="cerrarImagen()">X</span>
+  <img id="imagenGrande">
+</div>
+
+<script>
+function abrirImagen(img) {
+  document.getElementById("visor").style.display = "block";
+  document.getElementById("imagenGrande").src = img.src;
+}
+
+function cerrarImagen() {
+  document.getElementById("visor").style.display = "none";
+}
+</script>
+
+</body>
+</html>
