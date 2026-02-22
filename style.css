@@ -133,3 +133,30 @@ button:hover {
   color: gold;
   cursor: pointer;
 }
+.card {
+    position: relative;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px gold;
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 215, 0, 0.2),
+        rgba(212, 175, 55, 0.3)
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
