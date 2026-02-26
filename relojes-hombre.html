@@ -7,6 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="carrito-icono" onclick="abrirCarrito()" style="cursor:pointer; position:fixed; top:20px; right:20px; background:black; color:white; padding:10px; border-radius:20px;">
+  🛒 <span id="contador">0</span>
+</div>
+
+<div id="ventana-carrito" style="display:none; background:#222; padding:15px; position:fixed; right:20px; top:80px; width:300px; border-radius:10px;">
+  <h3 style="color:white;">Tu carrito</h3>
+  <div id="lista-carrito" style="color:white;"></div>
+  <p style="color:white;"><strong>Total: $<span id="total">0</span></strong></p>
+  <button onclick="comprar()">Comprar por WhatsApp</button>
+</div>
 
 <header>
     <h1>Relojes Hombre</h1>
@@ -15,132 +25,224 @@
 
 <section class="productos">
 
-  <div class="card">
+     <div class="card">
     <img src="img/relojcurrenh1.jpg" onclick="abrirImagen(this)" alt="Reloj Curren Negro Cobre 8389">
+
     <h3>Reloj Curren Negro Cobre 8389</h3>
-    <a class="precio"
-       href="https://wa.me/573008734383?text=Hola%2C+quiero+el+Reloj+Curren+Negro+Cobre+8389+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh1.jpg"
-       target="_blank">
-       $105.000
-    </a>
+
+    <div class="precio-valor">$105.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Curren Negro Cobre 8389',
+    105000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh1.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+
+      <div class="card">
+    <img src="img/relojcurrenh2.jpg" onclick="abrirImagen(this)" alt="Reloj Curren Azul Cobre 8389">
+
+    <h3>Reloj Curren Azul Cobre 8389</h3>
+
+    <div class="precio-valor">$105.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Curren Azul Cobre 8389',
+    105000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh2.jpg'
+     ); return false;">
+    🛒
+     </a>
 </div>
 
     <div class="card">
-        <img src="img/relojcurrenh2.jpg" onclick="abrirImagen(this)" alt="Reloj Curren Azul Cobre 8389">
-        <h3>Reloj Curren Azul Cobre 8389</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj+Curren+Azul+Cobre+8389+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh2.jpg"
-       target="_blank">
-           
-           $105.000
-        </a>
-    </div>
+    <img src="img/relojcurrenh3.jpg" onclick="abrirImagen(this)" alt="Reloj Curren Negro 8389">
+
+    <h3>Reloj Curren Negro 8389</h3>
+
+    <div class="precio-valor">$105.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Curren Negro 8389',
+    105000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh3.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+
+
+
+       <div class="card">
+    <img src="img/relojcurrenh4.jpg" onclick="abrirImagen(this)" alt="Reloj curren bicolor fondo negro 8388">
+
+    <h3>Reloj curren bicolor fondo negro 8388</h3>
+
+    <div class="precio-valor">$105.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj curren bicolor fondo negro 8388',
+    105000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh4.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+   
+
+      <div class="card">
+    <img src="img/relojcurrenh5.jpg" onclick="abrirImagen(this)" alt="Reloj Curren Plateado Fondo Negro">
+
+    <h3>Reloj Curren Plateado Fondo Negro 8388</h3>
+
+    <div class="precio-valor">$105.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Curren Fondo Negro',
+    105000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh5.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+    
+
+      <div class="card">
+    <img src="img/relojcurrenh6.jpg" onclick="abrirImagen(this)" alt="Reloj Curren Plateado Fondo Verde">
+
+    <h3>Reloj Curren Plateado Fondo Verde 8388</h3>
+
+    <div class="precio-valor">$105.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Curren Fondo Verde',
+    105000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh6.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+
+
+    
+      <div class="card">
+    <img src="img/relojcurrenh7.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Blanco">
+
+    <h3>Reloj Sinobi Blanco 9922</h3>
+
+    <div class="precio-valor">$130.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Sinobi Blanco 9922',
+    130000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh7.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+
+    
+      <div class="card">
+    <img src="img/relojcurrenh8.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Negro">
+
+    <h3>Reloj Sinobi Negro 9922</h3>
+
+    <div class="precio-valor">$130.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Sinobi Negro 9922',
+    130000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh8.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+
+    
+     <div class="card">
+    <img src="img/relojcurrenh9.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Verde">
+
+    <h3>Reloj Sinobi Verde 9922</h3>
+
+    <div class="precio-valor">$130.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Sinobi Verde 9922',
+    130000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh9.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
 
     <div class="card">
-        <img src="img/relojcurrenh3.jpg" onclick="abrirImagen(this)" alt="Reloj Curren Negro 8389">
-        <h3>Reloj Curren Negro 8389</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj+Curren+Negro+8389+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh3.jpg"
-       target="_blank">
-          
-           $105.000
-        </a>
-    </div>
+    <img src="img/relojcurrenh10.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Azul">
 
+    <h3>Reloj Sinobi Azul 9922</h3>
 
+    <div class="precio-valor">$130.000</div>
 
-      <div class="card">
-        <img src="img/relojcurrenh4.jpg" onclick="abrirImagen(this)" alt="reloj curren bicolor fondo negro 8388">
-        <h3>Reloj Curren Bicolor Fondo Negro 8388</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20reloj+curren+bicolor+fondo+negro+8388+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh5.jpg"
-       target="_blank">
-           
-           $105.000
-        </a>
-    </div>
+    <a href="#"
 
-      <div class="card">
-        <img src="img/relojcurrenh5.jpg" onclick="abrirImagen(this)" alt="reloj curren plateado fondo negro 8388">
-        <h3>Reloj Curren Plateado Fondo Negro 8388</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20reloj+curren+plateado+fondo+negro+8388+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh6.jpg"
-       target="_blank">
-           
-           $105.000
-        </a>
-    </div>
-
-      <div class="card">
-        <img src="img/relojcurrenh6.jpg" onclick="abrirImagen(this)" alt="reloj curren plateado fondo Verde 8388">
-        <h3>Reloj Curren Plateado Fondo Verde 8388</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj+curren+plateado+fondo+Verde+8388+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh7.jpg"
-       target="_blank">
-           
-           $105.000
-        </a>
-    </div>
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj Sinobi Azul 9922',
+    130000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh10.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+      
 
     
       <div class="card">
-        <img src="img/relojcurrenh7.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Blanco">
-        <h3>Reloj Sinobi Blanco 9922</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Sinobi%20Blanco+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh8.jpg"
-       target="_blank">
-           
-           $130.000
-        </a>
-    </div>
+    <img src="img/relojcurrenh11.jpg" onclick="abrirImagen(this)" alt="Reloj FoxBox 0047">
 
-    
-      <div class="card">
-        <img src="img/relojcurrenh8.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Negro">
-        <h3>Reloj Sinobi Negro 9922</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Sinobi%20Negro+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh9.jpg"
-       target="_blank">
-           
-           $130.000
-        </a>
-    </div>
+    <h3>Reloj FoxBox 0047</h3>
 
-    
-      <div class="card">
-        <img src="img/relojcurrenh9.jpg" onclick="abrirImagen(this)" alt="Reloj Sinobi Verde">
-        <h3>Reloj Sinobi Verde 9922</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Sinobi%20Verde+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh10.jpg"
-       target="_blank">
-           
-           $130.000
-        </a>
-    </div>
+    <div class="precio-valor">$165.000</div>
 
-    
-      <div class="card">
-        <img src="img/relojcurrenh10.jpg" onclick="abrirImagen(this)" alt="RReloj Sinobi Azul">
-        <h3>Reloj Sinobi Azul 9922</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20Reloj%20Sinobi%20Azul+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh11.jpg"
-       target="_blank">
-         
-           $130.000
-        </a>
-    </div>
+    <a href="#"
 
-    
-      <div class="card">
-        <img src="img/relojcurrenh11.jpg" onclick="abrirImagen(this)" alt="reloj foxbox 0047">
-        <h3>Reloj FoxBox 0047</h3>
-        <a class="precio"
-           href="https://wa.me/573008734383?text=Hola,%20quiero%20el%20reloj+foxbox+0047+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2Frelojcurrenh12.jpg"
-       target="_blank">
-        
-           $165.000
-        </a>
-    </div>
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Reloj FoxBox 0047',
+    165000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh11.jpg'
+     ); return false;">
+    🛒
+     </a>
+</div>
 
 </section>
  <div id="visor" class="visor">
@@ -149,13 +251,69 @@
 </div>
 
 <script>
-function abrirImagen(img) {
-  document.getElementById("visor").style.display = "block";
-  document.getElementById("imagenGrande").src = img.src;
+let carrito = [];
+
+function agregarAlCarrito(nombre, precio, imagen){
+    carrito.push({nombre, precio, imagen});
+    actualizarCarrito();
 }
 
-function cerrarImagen() {
-  document.getElementById("visor").style.display = "none";
+function eliminarDelCarrito(index){
+    carrito.splice(index, 1);
+    actualizarCarrito();
+}
+
+function actualizarCarrito(){
+    let lista = document.getElementById("lista-carrito");
+    let totalElemento = document.getElementById("total");
+    let contador = document.getElementById("contador");
+
+    lista.innerHTML = "";
+    let suma = 0;
+
+    carrito.forEach((producto, index)=>{
+        suma += producto.precio;
+
+        lista.innerHTML += `
+            <div style="margin-bottom:10px; border-bottom:1px solid gray; padding-bottom:5px;">
+                <img src="${producto.imagen}" width="50"><br>
+                ${producto.nombre}<br>
+                $${producto.precio.toLocaleString('es-CO')}<br>
+                <button onclick="eliminarDelCarrito(${index})">❌</button>
+            </div>
+        `;
+    });
+
+    totalElemento.textContent = suma.toLocaleString('es-CO');
+    contador.textContent = carrito.length;
+}
+
+function abrirCarrito(){
+    let ventana = document.getElementById("ventana-carrito");
+    ventana.style.display =
+        ventana.style.display === "block" ? "none" : "block";
+}
+
+function comprar(){
+    if(carrito.length === 0){
+        alert("El carrito está vacío");
+        return;
+    }
+
+    let mensaje = "Hola quiero comprar:%0A%0A";
+    let total = 0;
+
+    carrito.forEach(producto=>{
+        mensaje += "- " + producto.nombre +
+                   " $" + producto.precio.toLocaleString('es-CO') +
+                   "%0AImagen: " + producto.imagen +
+                   "%0A%0A";
+        total += producto.precio;
+    });
+
+    mensaje += "Total: $" + total.toLocaleString('es-CO');
+
+    window.open("https://wa.me/573008734383?text=" + mensaje, "_blank");
 }
 </script>
 

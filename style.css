@@ -91,21 +91,28 @@ button:hover {
 }
 
 .precio {
-    display: inline-block;
-    background-color: gold;
-    color: black;
-    font-weight: bold;
-    padding: 8px 15px;
-    border-radius: 8px;
-    text-decoration: none;
-    margin-top: 10px;
-    transition: 0.3s;
+  background: #ffd700;
+  color: black;
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .precio:hover {
-    background-color: #d4af37;
-    transform: scale(1.05);
+  background: #ffbf00;
+
 }
+.precio-valor {
+  margin-top: 8px;
+  font-weight: bold;
+  color: white;
+}
+
 .visor {
   display: none;
   position: fixed;
