@@ -173,3 +173,12 @@ button:hover {
     top: 120px;
   }
 }
+#ventana-carrito {
+  position: fixed !important;
+  z-index: 999999 !important;
+}
+
+#carrito-icono {
+  position: fixed !important;
+  z-index: 999999 !important;
+}
