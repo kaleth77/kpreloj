@@ -91,28 +91,21 @@ button:hover {
 }
 
 .precio {
-  background: #ffd700;
-  color: black;
-  padding: 8px 15px;
-  border-radius: 20px;
-  display: inline-block;
-  text-decoration: none;
-  font-weight: bold;
-  border: none;
-  cursor: pointer;
-  transition: 0.3s;
+    display: inline-block;
+    background-color: gold;
+    color: black;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: 0.3s;
 }
 
 .precio:hover {
-  background: #ffbf00;
-
+    background-color: #d4af37;
+    transform: scale(1.05);
 }
-.precio-valor {
-  margin-top: 8px;
-  font-weight: bold;
-  color: white;
-}
-
 .visor {
   display: none;
   position: fixed;
@@ -166,4 +159,17 @@ button:hover {
 
 .card:hover::after {
     opacity: 1;
+}
+#ventana-carrito {
+  position: fixed;
+  z-index: 9999;
+}
+
+@media (max-width: 768px) {
+  #ventana-carrito {
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 120px;
+  }
 }
