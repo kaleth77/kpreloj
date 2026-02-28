@@ -20,13 +20,12 @@ header h1 {
 
 .productos {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 en PC */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding: 40px;
     max-width: 1200px;
     margin: auto;
 }
-
 
 .card {
     background: #111;
@@ -38,7 +37,7 @@ header h1 {
 
 .card img {
     width: 100%;
-    aspect-ratio: 1 / 1;   /* 👈 esto es la clave */
+    aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 
@@ -65,7 +64,7 @@ button:hover {
 
 @media (max-width: 768px) {
     .productos {
-        grid-template-columns: repeat(2, 1fr); /* 2 en celular */
+        grid-template-columns: repeat(2, 1fr);
         gap: 15px;
         padding: 15px;
     }
@@ -74,10 +73,12 @@ button:hover {
         height: 150px;
     }
 }
+
 .card a {
     text-decoration: none;
     color: white;
 }
+
 .volver {
     display: inline-block;
     margin-top: 10px;
@@ -106,33 +107,36 @@ button:hover {
     background-color: #d4af37;
     transform: scale(1.05);
 }
+
 .visor {
   display: none;
   position: fixed;
   z-index: 2000;
-  left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0,0,0,0.9);
-  text-align: center;
+
+  justify-content: center;
+  align-items: center;
 }
 
 .visor img {
-  margin-top: 5%;
   max-width: 90%;
-  max-height: 80%;
+  max-height: 85%;
   border-radius: 15px;
 }
 
 .visor span {
   position: absolute;
   top: 20px;
-  right: 40px;
+  right: 30px;
   font-size: 30px;
   color: gold;
   cursor: pointer;
 }
+
 .card {
     position: relative;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
@@ -160,6 +164,7 @@ button:hover {
 .card:hover::after {
     opacity: 1;
 }
+
 #ventana-carrito {
   position: fixed;
   z-index: 9999;
@@ -173,12 +178,24 @@ button:hover {
     top: 120px;
   }
 }
-#ventana-carrito {
+
+/* 🔥 ARREGLO DEFINITIVO PARA QUE NO QUEDE ATRÁS */
+#carrito-icono{
   position: fixed !important;
-  z-index: 999999 !important;
+  top: 20px;
+  right: 20px;
+  z-index: 9999999 !important;
 }
 
-#carrito-icono {
+#ventana-carrito{
   position: fixed !important;
-  z-index: 999999 !important;
+  z-index: 9999999 !important;
+}
+
+/* Desactiva transform en móvil para evitar conflicto de capas */
+@media (max-width: 768px){
+  .card:hover{
+    transform: none !important;
+    box-shadow: none !important;
+  }
 }

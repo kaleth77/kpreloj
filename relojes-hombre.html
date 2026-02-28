@@ -7,16 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="carrito-icono" onclick="abrirCarrito()" style="cursor:pointer; position:fixed; top:20px; right:20px; background:black; color:white; padding:10px; border-radius:20px;">
-  🛒 <span id="contador">0</span>
-</div>
-
-<div id="ventana-carrito" style="display:none; background:#222; padding:15px; position:fixed; right:20px; top:80px; width:300px; border-radius:10px;">
-  <h3 style="color:white;">Tu carrito</h3>
-  <div id="lista-carrito" style="color:white;"></div>
-  <p style="color:white;"><strong>Total: $<span id="total">0</span></strong></p>
-  <button onclick="comprar()">Comprar por WhatsApp</button>
-</div>
+   
 
 <header>
     <h1>Relojes Hombre</h1>
@@ -243,6 +234,142 @@
     🛒
      </a>
 </div>
+<div class="card">
+    <img src="img/relojcurrenh12.jpeg" onclick="abrirImagen(this)" alt="Rolex Dorado Fondo Negro">
+
+    <h3>Rolex Dorado Fondo Negro</h3>
+
+    <div class="precio-valor">$95.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'RRolex Dorado Fondo Negro',
+    95000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh12.jpeg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+      
+
+    
+      <div class="card">
+    <img src="img/relojcurrenh13.jpeg" onclick="abrirImagen(this)" alt="Rolex Dorado Fondo Azul">
+
+    <h3>Rolex Dorado Fondo Azul</h3>
+
+    <div class="precio-valor">$95.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Rolex Dorado Fondo Azul',
+    95000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh13.jpeg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+<div class="card">
+    <img src="img/relojcurrenh14.jpeg" onclick="abrirImagen(this)" alt="Rolex Bicolor Fondo Azul">
+
+    <h3>Rolex Bicolor Fondo Azul</h3>
+
+    <div class="precio-valor">$95.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Rolex Bicolor Fondo Azul',
+    95000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh14.jpeg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+      
+
+    
+      <div class="card">
+    <img src="img/relojcurrenh15.jpeg" onclick="abrirImagen(this)" alt="Rolex Bicolor Fondo Negro">
+
+    <h3>Rolex Bicolor Fondo Negro</h3>
+
+    <div class="precio-valor">$95.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Rolex Bicolor Fondo Negro',
+    95000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh15.jpeg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+<div class="card">
+    <img src="img/relojcurrenh16.jpeg" onclick="abrirImagen(this)" alt="Rolex Plateado Fondo Verde">
+
+    <h3>Rolex Plateado Fondo Verde</h3>
+
+    <div class="precio-valor">$95.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Rolex Plateado Fondo Verde',
+    95000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh16.jpeg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+      
+
+    
+      <div class="card">
+    <img src="img/relojcurrenh17.jpeg" onclick="abrirImagen(this)" alt="Rolex Plateado Fondo Negro">
+
+    <h3>Rolex Plateado Fondo Negro</h3>
+
+    <div class="precio-valor">$95.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Rolex Plateado Fondo Negro',
+    95000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh17.jpeg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+<div class="card">
+    <img src="img/relojcurrenh18.jpeg" onclick="abrirImagen(this)" alt="Rolex Plateado Fondo Azul">
+
+    <h3>Rolex Plateado Fondo Azul</h3>
+
+    <div class="precio-valor">$95.000</div>
+
+    <a href="#"
+
+    class="precio"
+    onclick="agregarAlCarrito(
+    'Rolex Plateado Fondo Azul',
+    95000,
+     'https://kaleth77.github.io/kpreloj/img/relojcurrenh18.jpeg'
+     ); return false;">
+    🛒
+     </a>
+</div>
+      
 
 </section>
  <div id="visor" class="visor">
@@ -250,70 +377,34 @@
   <img id="imagenGrande">
 </div>
 
+
+<!-- ICONO CARRITO GLOBAL -->
+<div onclick="document.getElementById('modal-carrito').style.display='block'"
+     style="cursor:pointer; position:fixed; top:20px; right:20px; background:black; color:white; padding:10px; border-radius:20px; z-index:999;">
+  🛒 <span id="contador-carrito">0</span>
+</div>
+
+<!-- MODAL CARRITO GLOBAL -->
+<div id="modal-carrito"
+     style="display:none; background:#222; padding:15px; position:fixed; right:20px; top:80px; width:300px; border-radius:10px; z-index:999;">
+
+  <h3 style="color:white;">Tu carrito</h3>
+  <div id="lista-carrito" style="color:white;"></div>
+  <p style="color:white;"><strong>Total: $<span id="total">0</span></strong></p>
+
+  <button onclick="comprarWhatsApp()">Comprar por WhatsApp</button>
+  <button onclick="document.getElementById('modal-carrito').style.display='none'">Cerrar</button>
+</div>
+
+<script src="carrito.js"></script>
 <script>
-let carrito = [];
-
-function agregarAlCarrito(nombre, precio, imagen){
-    carrito.push({nombre, precio, imagen});
-    actualizarCarrito();
+function abrirImagen(img) {
+  document.getElementById("visor").style.display = "flex";
+  document.getElementById("imagenGrande").src = img.src;
 }
 
-function eliminarDelCarrito(index){
-    carrito.splice(index, 1);
-    actualizarCarrito();
-}
-
-function actualizarCarrito(){
-    let lista = document.getElementById("lista-carrito");
-    let totalElemento = document.getElementById("total");
-    let contador = document.getElementById("contador");
-
-    lista.innerHTML = "";
-    let suma = 0;
-
-    carrito.forEach((producto, index)=>{
-        suma += producto.precio;
-
-        lista.innerHTML += `
-            <div style="margin-bottom:10px; border-bottom:1px solid gray; padding-bottom:5px;">
-                <img src="${producto.imagen}" width="50"><br>
-                ${producto.nombre}<br>
-                $${producto.precio.toLocaleString('es-CO')}<br>
-                <button onclick="eliminarDelCarrito(${index})">❌</button>
-            </div>
-        `;
-    });
-
-    totalElemento.textContent = suma.toLocaleString('es-CO');
-    contador.textContent = carrito.length;
-}
-
-function abrirCarrito(){
-    let ventana = document.getElementById("ventana-carrito");
-    ventana.style.display =
-        ventana.style.display === "block" ? "none" : "block";
-}
-
-function comprar(){
-    if(carrito.length === 0){
-        alert("El carrito está vacío");
-        return;
-    }
-
-    let mensaje = "Hola quiero comprar:%0A%0A";
-    let total = 0;
-
-    carrito.forEach(producto=>{
-        mensaje += "- " + producto.nombre +
-                   " $" + producto.precio.toLocaleString('es-CO') +
-                   "%0AImagen: " + producto.imagen +
-                   "%0A%0A";
-        total += producto.precio;
-    });
-
-    mensaje += "Total: $" + total.toLocaleString('es-CO');
-
-    window.open("https://wa.me/573008734383?text=" + mensaje, "_blank");
+function cerrarImagen() {
+  document.getElementById("visor").style.display = "none";
 }
 </script>
 
