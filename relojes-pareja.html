@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relojes Pareja - KP</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
    
@@ -632,9 +632,10 @@
   <span onclick="cerrarImagen()">X</span>
   <img id="imagenGrande">
 </div>
+
 <!-- ICONO CARRITO GLOBAL -->
-<div onclick="document.getElementById('modal-carrito').style.display='block'"
-     style="cursor:pointer; position:fixed; top:20px; right:20px; background:black; color:white; padding:10px; border-radius:20px; z-index:999;">
+
+<div id="carrito-icono" onclick="abrirCarrito()">
   🛒 <span id="contador-carrito">0</span>
 </div>
 
@@ -649,14 +650,14 @@
     <p><strong>Total: $<span id="total">0</span></strong></p>
 
     <button onclick="comprarWhatsApp()">Comprar por WhatsApp</button>
-    <button onclick="document.getElementById('modal-carrito').style.display='none'">
-      Cerrar
-    </button>
+    <button onclick="cerrarCarrito()">
+  Cerrar
+</button>
   </div>
 
 </div>
 
-<script src="carrito.js"></script>
+<script src="carrito.js?v=2"></script>
 <script>
 function abrirImagen(img) {
   document.getElementById("visor").style.display = "flex";

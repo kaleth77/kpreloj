@@ -1,10 +1,19 @@
-
 console.log("Carrito conectado");
 
 let carrito = JSON.parse(localStorage.getItem("kp_carrito")) || [];
 
 function guardarCarrito() {
   localStorage.setItem("kp_carrito", JSON.stringify(carrito));
+}
+
+function abrirCarrito(){
+  const modal = document.getElementById("modal-carrito");
+  modal.style.display = "flex";
+}
+
+function cerrarCarrito(){
+  const modal = document.getElementById("modal-carrito");
+  modal.style.display = "none";
 }
 
 function agregarAlCarrito(nombre, precio, imagen) {

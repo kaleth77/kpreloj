@@ -165,19 +165,7 @@ button:hover {
     opacity: 1;
 }
 
-#ventana-carrito {
-  position: fixed;
-  z-index: 9999;
-}
 
-@media (max-width: 768px) {
-  #ventana-carrito {
-    width: 95%;
-    left: 50%;
-    transform: translateX(-50%);
-    top: 120px;
-  }
-}
 
 /* 🔥 ARREGLO DEFINITIVO PARA QUE NO QUEDE ATRÁS */
 #carrito-icono{
@@ -187,10 +175,6 @@ button:hover {
   z-index: 9999999 !important;
 }
 
-#ventana-carrito{
-  position: fixed !important;
-  z-index: 9999999 !important;
-}
 
 /* Desactiva transform en móvil para evitar conflicto de capas */
 @media (max-width: 768px){
@@ -201,7 +185,7 @@ button:hover {
 }
 
 #modal-carrito {
-  display: none;
+  display: none;              /* 🔥 solo una vez */
   position: fixed;
   top: 80px;
   right: 20px;
@@ -212,8 +196,7 @@ button:hover {
   border-radius: 15px;
   z-index: 9999999;
 
-  display: flex;
-  flex-direction: column;
+  flex-direction: column;     /* 🔥 quitamos display:flex de aquí */
 }
 
 #lista-carrito {
