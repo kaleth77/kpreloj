@@ -149,13 +149,15 @@ button:hover {
 
 .visor span {
   position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 30px;
-  color: #d4af37;
+  top: 60px;       /* más abajo */
+  right: 60px;     /* más hacia adentro */
+  font-size: 28px;
+  color: gold;
   cursor: pointer;
+  background: rgba(0,0,0,0.6);
+  padding: 5px 12px;
+  border-radius: 50%;
 }
-
 /* ===== ICONO CARRITO ===== */
 #carrito-icono{
   position: fixed !important;
