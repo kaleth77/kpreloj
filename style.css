@@ -189,13 +189,31 @@ button:hover {
 
 #ventana-carrito{
   position: fixed !important;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-height: 85vh;      /* 🔥 LIMITE DE ALTURA */
+  background: #111;
+  border-radius: 15px;
+  padding: 20px;
   z-index: 9999999 !important;
+
+  display: flex;        /* 🔥 CLAVE */
+  flex-direction: column;
+}
+#lista-carrito{
+  flex: 1;               /* ocupa el espacio disponible */
+  overflow-y: auto;      /* 🔥 permite bajar */
+  margin-bottom: 15px;
+}
+#total{
+  font-size: 18px;
+  font-weight: bold;
 }
 
-/* Desactiva transform en móvil para evitar conflicto de capas */
-@media (max-width: 768px){
-  .card:hover{
-    transform: none !important;
-    box-shadow: none !important;
-  }
+.boton-comprar{
+  position: sticky;
+  bottom: 0;
+  background: gold;
 }
