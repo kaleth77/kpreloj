@@ -341,22 +341,28 @@
 </div>
 
 
-<!-- ICONO CARRITO GLOBAL -->
+
 <div onclick="document.getElementById('modal-carrito').style.display='block'"
      style="cursor:pointer; position:fixed; top:20px; right:20px; background:black; color:white; padding:10px; border-radius:20px; z-index:999;">
   🛒 <span id="contador-carrito">0</span>
 </div>
 
-<!-- MODAL CARRITO GLOBAL -->
-<div id="modal-carrito"
-     style="display:none; background:#222; padding:15px; position:fixed; right:20px; top:80px; width:300px; border-radius:10px; z-index:999;">
 
-  <h3 style="color:white;">Tu carrito</h3>
-  <div id="lista-carrito" style="color:white;"></div>
-  <p style="color:white;"><strong>Total: $<span id="total">0</span></strong></p>
+<div id="modal-carrito">
 
-  <button onclick="comprarWhatsApp()">Comprar por WhatsApp</button>
-  <button onclick="document.getElementById('modal-carrito').style.display='none'">Cerrar</button>
+  <h3>Tu carrito</h3>
+
+  <div id="lista-carrito"></div>
+
+  <div class="carrito-footer">
+    <p><strong>Total: $<span id="total">0</span></strong></p>
+
+    <button onclick="comprarWhatsApp()">Comprar por WhatsApp</button>
+    <button onclick="document.getElementById('modal-carrito').style.display='none'">
+      Cerrar
+    </button>
+  </div>
+
 </div>
 
 <script src="carrito.js"></script>

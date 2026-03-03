@@ -189,31 +189,49 @@ button:hover {
 
 #ventana-carrito{
   position: fixed !important;
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-height: 85vh;      /* 🔥 LIMITE DE ALTURA */
-  background: #111;
-  border-radius: 15px;
-  padding: 20px;
   z-index: 9999999 !important;
+}
 
-  display: flex;        /* 🔥 CLAVE */
+/* Desactiva transform en móvil para evitar conflicto de capas */
+@media (max-width: 768px){
+  .card:hover{
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+#modal-carrito {
+  display: none;
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 350px;
+  height: 80vh;
+  background: #111;
+  padding: 20px;
+  border-radius: 15px;
+  z-index: 9999999;
+
+  display: flex;
   flex-direction: column;
 }
-#lista-carrito{
-  flex: 1;               /* ocupa el espacio disponible */
-  overflow-y: auto;      /* 🔥 permite bajar */
+
+#lista-carrito {
+  flex: 1;
+  overflow-y: auto;
   margin-bottom: 15px;
 }
-#total{
-  font-size: 18px;
-  font-weight: bold;
+
+.carrito-footer {
+  border-top: 1px solid #333;
+  padding-top: 10px;
 }
 
-.boton-comprar{
-  position: sticky;
-  bottom: 0;
-  background: gold;
+@media (max-width: 768px) {
+  #modal-carrito {
+    width: 95%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    height: 85vh;
+  }
 }
