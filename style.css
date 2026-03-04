@@ -50,6 +50,8 @@ header h1 {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+    display: block;
+    margin: 0 auto;
 }
 
 .card h3 {
