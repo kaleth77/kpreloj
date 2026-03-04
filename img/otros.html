@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Otros - KP</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Otros</h1>
+    <a class="volver" href="index.html">⬅ Volver al inicio</a>
+</header>
+
+<section class="productos">
+
+    <div class="card">
+        <img src="img/Cartera BOSS.jpg" onclick="abrirImagen(this)" alt="Cartera BOSS">
+        <h3>Cartera BOSS</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20La%20Cartera%20BOSS%20+https%3A%2F%2Fkaleth77.github.io%2Fkpreloj%2Fimg%2FCartera BOSS.jpg"
+           target="_blank">
+           $180.000
+        </a> 
+    </div>
+
+    <div class="card">
+        <img src="img/Cartera HUGO  FONDO ROJO.jpg" onclick="abrirImagen(this)" alt="Cartera HUGO  FONDO ROJO">
+        <h3>Cartera HUGO  FONDO ROJO</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20La%20Cartera+HUGO+FONDO+ROJO"
+           target="_blank">
+           $210.000
+        </a>
+    </div>
+
+  
+    </div>
+
+      <div class="card">
+        <img src="img/Cartera MONT BLANC FONDO ROJO.jpg" onclick="abrirImagen(this)" alt="Cartera MONT BLANC FONDO ROJO">
+        <h3>Cartera MONT BLANC FONDO ROJO</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20La+Cartera+MONT+BLANC+FONDO+ROJO"
+           target="_blank">
+           $195.000
+        </a>
+    </div>
+
+      <div class="card">
+        <img src="img/Cartera MONT BLANC.jpg" onclick="abrirImagen(this)" alt="Cartera MONT BLANC">
+        <h3>Cartera MONT BLANC</h3>
+        <a class="precio"
+           href="https://wa.me/573008734383?text=Hola,%20quiero%20La%20Cartera+MONT+BLANC"
+           target="_blank">
+           $195.000
+        </a>
+    </div>
+
+      
+
+</section>
+
+   <div id="visor" class="visor">
+  <span onclick="cerrarImagen()">X</span>
+  <img id="imagenGrande">
+</div>
+
+<script>
+function abrirImagen(img) {
+  document.getElementById("visor").style.display = "block";
+  document.getElementById("imagenGrande").src = img.src;
+}
+
+function cerrarImagen() {
+  document.getElementById("visor").style.display = "none";
+}
+</script>
+
+
+</body>
+</html>
