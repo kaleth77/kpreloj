@@ -1,4 +1,3 @@
-
 console.log("Carrito conectado");
 
 let carrito = JSON.parse(localStorage.getItem("kp_carrito")) || [];
@@ -77,4 +76,5 @@ function comprarWhatsApp() {
 
   window.open("https://wa.me/573008734383?text=" + mensaje, "_blank");
 }
+
 document.addEventListener("DOMContentLoaded", actualizarCarrito);
