@@ -61,20 +61,29 @@ function comprarWhatsApp() {
     return;
   }
 
-  let mensaje = "Hola quiero comprar:%0A%0A";
+  let mensaje = "🛒 PEDIDO KP\n\n";
+  mensaje += "📦 Productos:\n\n";
+
   let total = 0;
 
   carrito.forEach(producto => {
-    mensaje += "- " + producto.nombre +
-               " $" + producto.precio.toLocaleString('es-CO') +
-               "%0AImagen: " + producto.imagen +
-               "%0A%0A";
+    mensaje += "• " + producto.nombre +
+               " - $" + producto.precio.toLocaleString('es-CO') +
+               "\n🔗 Imagen: " + producto.imagen +
+               "\n\n";
     total += producto.precio;
   });
 
-  mensaje += "Total: $" + total.toLocaleString('es-CO');
+  mensaje += "💰 Total: $" + total.toLocaleString('es-CO');
+  mensaje += "\n\n📍 Enviar datos de entrega.";
 
-  window.open("https://wa.me/573008734383?text=" + mensaje, "_blank");
+  const url = "https://wa.me/573008734383?text=" + encodeURIComponent(mensaje);
+
+  window.open(url, "_blank");
+
+  carrito = [];
+  guardarCarrito();
+  actualizarCarrito();
 }
 
 document.addEventListener("DOMContentLoaded", actualizarCarrito);
