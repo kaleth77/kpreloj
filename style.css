@@ -1,23 +1,27 @@
 body {
     margin: 0;
     font-family: 'Poppins', Arial, sans-serif;
-    background: linear-gradient(135deg, #0c0c0c, #1a1a1a);
+    background: #000;
     color: white;
     text-align: center;
 }
 
 /* ===== HEADER PREMIUM ===== */
 header {
-    background: #111;
+    background: #000;
     padding: 30px;
-    border-bottom: 1px solid #d4af37;
+    border-bottom: 1px solid #444;
 }
 
 header h1 {
-    color: #d4af37;
+    color: white;
     font-size: 50px;
     margin: 0;
     letter-spacing: 3px;
+}
+
+header h1:hover{
+    color:#cfcfcf;
 }
 
 /* ===== GRID PRODUCTOS ===== */
@@ -33,7 +37,7 @@ header h1 {
 /* ===== TARJETAS PREMIUM ===== */
 .card {
     background: #141414;
-    border: 1px solid rgba(212,175,55,0.4);
+    border: 1px solid rgba(255,255,255,0.2);
     border-radius: 18px;
     overflow: hidden;
     text-align: center;
@@ -43,7 +47,7 @@ header h1 {
 
 .card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 15px 35px rgba(212,175,55,0.3);
+    box-shadow: 0 15px 35px rgba(255,255,255,0.15);
 }
 
 .card img {
@@ -58,17 +62,18 @@ header h1 {
     padding: 10px;
     font-size: 14px;
     font-weight: 500;
+    color:white;
 }
 
-/* ===== EFECTO DORADO SUAVE ===== */
+/* ===== EFECTO SUAVE ===== */
 .card::after {
     content: "";
     position: absolute;
     inset: 0;
     background: linear-gradient(
         45deg,
-        rgba(212,175,55,0.15),
-        rgba(212,175,55,0.05)
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.03)
     );
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -79,10 +84,10 @@ header h1 {
     opacity: 1;
 }
 
-/* ===== BOTONES PREMIUM ===== */
+/* ===== BOTONES ===== */
 button {
     margin-top: 10px;
-    background: #d4af37;
+    background: white;
     color: black;
     border: none;
     padding: 12px;
@@ -94,14 +99,14 @@ button {
 }
 
 button:hover {
-    background: white;
+    background: #d9d9d9;
     color: black;
 }
 
 /* ===== PRECIO ===== */
 .precio {
     display: inline-block;
-    background-color: #d4af37;
+    background-color: white;
     color: black;
     font-weight: bold;
     padding: 8px 15px;
@@ -112,7 +117,7 @@ button:hover {
 }
 
 .precio:hover {
-    background-color: white;
+    background-color: #d9d9d9;
     transform: scale(1.05);
 }
 
@@ -121,7 +126,7 @@ button:hover {
     display: inline-block;
     margin-top: 10px;
     text-decoration: none;
-    color: #d4af37;
+    color: white;
     font-weight: bold;
 }
 
@@ -151,15 +156,16 @@ button:hover {
 
 .visor span {
   position: absolute;
-  top: 60px;       /* más abajo */
-  right: 60px;     /* más hacia adentro */
+  top: 60px;
+  right: 60px;
   font-size: 28px;
-  color: gold;
+  color: #cfcfcf;
   cursor: pointer;
   background: rgba(0,0,0,0.6);
   padding: 5px 12px;
   border-radius: 50%;
 }
+
 /* ===== ICONO CARRITO ===== */
 #carrito-icono{
   position: fixed !important;
@@ -167,19 +173,20 @@ button:hover {
   right: 20px;
   z-index: 9999999 !important;
   background: #141414;
+  color:white;
   padding: 10px 15px;
   border-radius: 30px;
-  border: 1px solid #d4af37;
+  border: 1px solid #555;
   cursor: pointer;
   transition: 0.3s;
 }
 
 #carrito-icono:hover{
-  background: #d4af37;
-  color: black;
+  background: #2b2b2b;
+  color: white;
 }
 
-/* ===== MODAL CARRITO PREMIUM ===== */
+/* ===== MODAL CARRITO ===== */
 #modal-carrito {
   display: none;
   position: fixed;
@@ -187,11 +194,11 @@ button:hover {
   right: 20px;
   width: 350px;
   height: 80vh;
-  background: rgba(20,20,20,0.95);
+  background: rgba(0,0,0,0.95);
   backdrop-filter: blur(10px);
   padding: 20px;
   border-radius: 18px;
-  border: 1px solid rgba(212,175,55,0.4);
+  border: 1px solid rgba(255,255,255,0.2);
   z-index: 9999999;
   flex-direction: column;
 }
@@ -203,7 +210,7 @@ button:hover {
 }
 
 .carrito-footer {
-  border-top: 1px solid rgba(212,175,55,0.3);
+  border-top: 1px solid rgba(255,255,255,0.3);
   padding-top: 10px;
 }
 
@@ -233,7 +240,8 @@ button:hover {
     height: 85vh;
   }
 }
-/* ===== RESET LINKS (quita morado/azul feo) ===== */
+
+/* ===== RESET LINKS ===== */
 a {
   color: white !important;
   text-decoration: none;
@@ -244,10 +252,10 @@ a:visited {
 }
 
 a:hover {
-  color: #FFD700 !important;
+  color: #cfcfcf !important;
 }
 
-/* ===== FUENTES MÁS GRANDES Y PREMIUM ===== */
+/* ===== FUENTES ===== */
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
   font-size: 16px;
@@ -261,4 +269,4 @@ body {
 header h1 {
   font-size: 48px !important;
   letter-spacing: 2px;
-  }
+}
