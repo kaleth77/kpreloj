@@ -1,4 +1,5 @@
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vS02ENtcg8PoDQ8rIsUqjDJqXxwbDjsDEOqbSdMAGUIY4U_6ruB1N2M-UcXaWFJbEgZe-J4Yk4asPKP/pub?gid=727495021&single=true&output=csv";
+const BASE_IMG = "https://kaleth77.github.io/kpreloj/img/";
 
 function parsearCSV(texto) {
   const filas = texto.trim().split("\n");
