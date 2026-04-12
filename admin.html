@@ -63,6 +63,33 @@
       return `${ultimoDia} De ${meses[hoy.getMonth()]}`;
     }
 
+    // Dibuja texto mezclando Playfair (letras) y Arial (números)
+    function drawMixedText(ctx, text, x, y, size, bold) {
+      const weight = bold ? "bold" : "400";
+      ctx.save();
+      ctx.textAlign = "center";
+
+      // Medir cada carácter y dibujar individualmente
+      let totalWidth = 0;
+      const chars = text.split('');
+      const widths = chars.map(ch => {
+        const isNum = /[0-9]/.test(ch);
+        ctx.font = `${weight} ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
+        return ctx.measureText(ch).width;
+      });
+      totalWidth = widths.reduce((a, b) => a + b, 0);
+
+      let curX = x - totalWidth / 2;
+      chars.forEach((ch, i) => {
+        const isNum = /[0-9]/.test(ch);
+        ctx.font = `${weight} ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
+        ctx.fillText(ch, curX + widths[i] / 2, y);
+        curX += widths[i];
+      });
+
+      ctx.restore();
+    }
+
     const total = localStorage.getItem("kp_ultimo_total");
 
     if (!total) {
@@ -84,44 +111,31 @@
 
       img.onload = function () {
         const canvas = document.getElementById("canvas");
-        const W = img.width;   // 1024
-        const H = img.height;  // 1536
+        const W = img.width;
+        const H = img.height;
         canvas.width = W;
         canvas.height = H;
         const ctx = canvas.getContext("2d");
 
         ctx.drawImage(img, 0, 0);
-        ctx.textAlign = "center";
         ctx.fillStyle = "#ffffff";
         ctx.shadowColor = "rgba(0,0,0,0.95)";
         ctx.shadowBlur = 20;
         ctx.shadowOffsetX = 2;
         ctx.shadowOffsetY = 2;
 
-        // ── TEXTO ARRIBA — más grande y centrado en el espacio disponible ──
-        // Espacio arriba del KP: aprox y=0 a y=320
-        ctx.font = "bold 100px 'Playfair Display', serif";
-        ctx.fillText("Recordatorio", W / 2, 105);
+        // ── TEXTO ARRIBA ──────────────────────────────────────────────
+        drawMixedText(ctx, "Recordatorio", W/2, 105, 100, true);
+        drawMixedText(ctx, "Cantidad a pagar", W/2, 205, 76, false);
+        drawMixedText(ctx, precioTexto, W/2, 305, 92, true);
 
-        ctx.font = "400 76px 'Playfair Display', serif";
-        ctx.fillText("Cantidad a pagar", W / 2, 205);
-
-        ctx.font = "bold 88px 'Playfair Display', serif";
-        ctx.fillText(precioTexto, W / 2, 305);
-
-        // ── TEXTO ABAJO — más grande y centrado en el espacio disponible ──
-        // Espacio abajo del KP: aprox y=1050 a y=1536
-        ctx.font = "400 68px 'Playfair Display', serif";
-        ctx.fillText("Plazo para cancelar tu", W / 2, 1100);
-        ctx.fillText("producto", W / 2, 1180);
-
-        ctx.font = "400 80px 'Playfair Display', serif";
-        ctx.fillText(fecha, W / 2, 1275);
-
-        ctx.font = "400 64px 'Playfair Display', serif";
-        ctx.fillText("Métodos de pago", W / 2, 1360);
-        ctx.fillText("-Efectivo", W / 2, 1435);
-        ctx.fillText("-Nequi 3008734383", W / 2, 1510);
+        // ── TEXTO ABAJO ───────────────────────────────────────────────
+        drawMixedText(ctx, "Plazo para cancelar tu", W/2, 1100, 68, false);
+        drawMixedText(ctx, "producto", W/2, 1180, 68, false);
+        drawMixedText(ctx, fecha, W/2, 1275, 80, false);
+        drawMixedText(ctx, "Métodos de pago", W/2, 1360, 64, false);
+        drawMixedText(ctx, "-Efectivo", W/2, 1435, 64, false);
+        drawMixedText(ctx, "-Nequi 3008734383", W/2, 1510, 64, false);
 
         ctx.shadowColor = "transparent";
 
