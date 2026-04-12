@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KP Admin</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: Georgia, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      gap: 20px;
+    }
+    h1 { color: #c8960c; font-size: 28px; }
+    #info { font-size: 18px; color: #aaa; }
+    #total-pedido { font-size: 26px; color: #fff; font-weight: bold; }
+    canvas { display: none; }
+    #preview {
+      max-width: 90vw;
+      max-height: 60vh;
+      border: 2px solid #c8960c;
+      border-radius: 8px;
+      display: none;
+    }
+    #btn-descargar {
+      background: linear-gradient(135deg, #c8960c, #f5d060, #b8860b);
+      color: #000;
+      font-weight: bold;
+      font-size: 20px;
+      padding: 14px 36px;
+      border-radius: 8px;
+      text-decoration: none;
+      display: none;
+    }
+    #sin-pedido { font-size: 18px; color: #aaa; text-align: center; display: none; }
+  </style>
+</head>
+<body>
+
+  <h1>KP Admin</h1>
+  <div id="info">Último pedido:</div>
+  <div id="total-pedido"></div>
+  <canvas id="canvas"></canvas>
+  <img id="preview">
+  <a id="btn-descargar" download="recordatorio_kp.jpg">⬇️ Descargar imagen</a>
+  <div id="sin-pedido">No hay pedidos aún.<br>Espera a que un cliente compre.</div>
+
+  <script>
+    function obtenerFechaFinMes() {
+      const hoy = new Date();
+      const ultimoDia = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0).getDate();
+      const meses = [
+        "Enero","Febrero","Marzo","Abril","Mayo","Junio",
+        "Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"
+      ];
+      return `${ultimoDia} De ${meses[hoy.getMonth()]}`;
+    }
+
+    const total = localStorage.getItem("kp_ultimo_total");
+
+    if (!total) {
+      document.getElementById("sin-pedido").style.display = "block";
+    } else {
+      const precioTexto = "$" + parseInt(total).toLocaleString('es-CO');
+      const fecha = obtenerFechaFinMes();
+
+      document.getElementById("total-pedido").textContent = precioTexto;
+
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPG";
+
+      img.onload = function () {
+        const canvas = document.getElementById("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        const ctx = canvas.getContext("2d");
+
+        // Imagen original como fondo
+        ctx.drawImage(img, 0, 0);
+
+        // Tapar precio original
+        ctx.fillStyle = "#0a0a0a";
+        ctx.fillRect(150, 310, 766, 130);
+
+        // Nuevo precio
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 95px Georgia, serif";
+        ctx.textAlign = "center";
+        ctx.fillText(precioTexto, 533, 415);
+
+        // Tapar fecha original
+        ctx.fillStyle = "#0a0a0a";
+        ctx.fillRect(50, 1075, 966, 120);
+
+        // Nueva fecha
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 95px Georgia, serif";
+        ctx.textAlign = "center";
+        ctx.fillText(fecha, 533, 1170);
+
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+        const preview = document.getElementById("preview");
+        preview.src = dataUrl;
+        preview.style.display = "block";
+
+        const btn = document.getElementById("btn-descargar");
+        btn.href = dataUrl;
+        btn.style.display = "block";
+      };
+
+      img.onerror = function () {
+        alert("No se pudo cargar la imagen base. Verifica que recordatorio.JPG esté en la carpeta img.");
+      };
+    }
+  </script>
+
+</body>
+</html>
