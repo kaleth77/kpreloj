@@ -10,21 +10,21 @@
     body {
       background: #0a0a0a;
       color: #fff;
-      font-family: Georgia, serif;
+      font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
-      gap: 20px;
+      gap: 16px;
     }
-    h1 { color: #c8960c; font-size: 28px; }
-    #total-pedido { font-size: 26px; color: #fff; font-weight: bold; }
+    h1 { color: #c8960c; font-size: 26px; }
+    #total-pedido { font-size: 22px; color: #fff; }
     canvas { display: none; }
     #preview {
       max-width: 90vw;
-      max-height: 65vh;
+      max-height: 62vh;
       border: 2px solid #c8960c;
       border-radius: 8px;
       display: none;
@@ -33,8 +33,8 @@
       background: linear-gradient(135deg, #c8960c, #f5d060, #b8860b);
       color: #000;
       font-weight: bold;
-      font-size: 20px;
-      padding: 14px 36px;
+      font-size: 18px;
+      padding: 12px 32px;
       border-radius: 8px;
       text-decoration: none;
       display: none;
@@ -46,9 +46,9 @@
 
   <h1>KP Admin</h1>
   <div id="total-pedido"></div>
-  <canvas id="canvas"></canvas>
-  <img id="preview">
   <a id="btn-descargar" download="recordatorio_kp.jpg">⬇️ Descargar imagen</a>
+  <img id="preview">
+  <canvas id="canvas"></canvas>
   <div id="sin-pedido">No hay pedidos aún.<br>Espera a que un cliente compre.</div>
 
   <script>
@@ -84,58 +84,41 @@
         canvas.height = H;
         const ctx = canvas.getContext("2d");
 
-        // 1. Imagen original como fondo
+        // Imagen original como fondo
         ctx.drawImage(img, 0, 0);
 
-        // ── Fuente elegante igual a la imagen ──────────────────────────────
         ctx.textAlign = "center";
-
-        // Sombra suave para legibilidad
-        ctx.shadowColor = "rgba(0,0,0,0.8)";
-        ctx.shadowBlur = 18;
+        ctx.shadowColor = "rgba(0,0,0,0.9)";
+        ctx.shadowBlur = 15;
         ctx.shadowOffsetX = 2;
         ctx.shadowOffsetY = 2;
 
-        // ── TEXTO ARRIBA ───────────────────────────────────────────────────
-
-        // "Recordatorio"
+        // ── TEXTO ARRIBA ──────────────────────────────────────────────
         ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 85px Georgia, serif";
-        ctx.fillText("Recordatorio", W / 2, 110);
+        ctx.font = "bold 82px Arial, sans-serif";
+        ctx.fillText("Recordatorio", W / 2, 105);
 
-        // "Cantidad a pagar"
-        ctx.font = "65px Georgia, serif";
-        ctx.fillText("Cantidad a pagar", W / 2, 195);
+        ctx.font = "62px Arial, sans-serif";
+        ctx.fillText("Cantidad a pagar", W / 2, 190);
 
-        // PRECIO dinámico
-        ctx.font = "bold 75px Georgia, serif";
-        ctx.fillText(precioTexto, W / 2, 285);
+        ctx.font = "bold 72px Arial, sans-serif";
+        ctx.fillText(precioTexto, W / 2, 278);
 
-        // ── TEXTO ABAJO ────────────────────────────────────────────────────
+        // ── TEXTO ABAJO ───────────────────────────────────────────────
+        ctx.font = "56px Arial, sans-serif";
+        ctx.fillText("Plazo para cancelar tu", W / 2, 1090);
+        ctx.fillText("producto", W / 2, 1158);
 
-        // "Plazo para cancelar tu"
-        ctx.font = "58px Georgia, serif";
-        ctx.fillText("Plazo para cancelar tu", W / 2, 1095);
+        ctx.font = "bold 65px Arial, sans-serif";
+        ctx.fillText(fecha, W / 2, 1245);
 
-        // "producto"
-        ctx.fillText("producto", W / 2, 1165);
+        ctx.font = "52px Arial, sans-serif";
+        ctx.fillText("Métodos de pago", W / 2, 1320);
+        ctx.fillText("-Efectivo", W / 2, 1388);
+        ctx.fillText("-Nequi 3008734383", W / 2, 1456);
 
-        // FECHA dinámica
-        ctx.font = "bold 68px Georgia, serif";
-        ctx.fillText(fecha, W / 2, 1255);
-
-        // "Métodos de pago"
-        ctx.font = "55px Georgia, serif";
-        ctx.fillText("Métodos de pago", W / 2, 1335);
-
-        // "-Efectivo"
-        ctx.fillText("-Efectivo", W / 2, 1405);
-
-        // "-Nequi 3008734383"
-        ctx.fillText("-Nequi 3008734383", W / 2, 1475);
-
-        // ── Mostrar resultado ──────────────────────────────────────────────
         ctx.shadowColor = "transparent";
+
         const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
 
         const preview = document.getElementById("preview");
