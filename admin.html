@@ -72,7 +72,6 @@
       const fecha = obtenerFechaFinMes();
       document.getElementById("total-pedido").textContent = "Último pedido: " + precioTexto;
 
-      // Cargar fuente Playfair Display antes de dibujar
       document.fonts.ready.then(function () {
         cargarImagen(precioTexto, fecha);
       });
@@ -85,43 +84,44 @@
 
       img.onload = function () {
         const canvas = document.getElementById("canvas");
-        const W = img.width;
-        const H = img.height;
+        const W = img.width;   // 1024
+        const H = img.height;  // 1536
         canvas.width = W;
         canvas.height = H;
         const ctx = canvas.getContext("2d");
 
         ctx.drawImage(img, 0, 0);
         ctx.textAlign = "center";
+        ctx.fillStyle = "#ffffff";
         ctx.shadowColor = "rgba(0,0,0,0.95)";
-        ctx.shadowBlur = 18;
+        ctx.shadowBlur = 20;
         ctx.shadowOffsetX = 2;
         ctx.shadowOffsetY = 2;
-        ctx.fillStyle = "#ffffff";
 
-        // ── TEXTO ARRIBA ──────────────────────────────────────────────
-        ctx.font = "bold 82px 'Playfair Display', serif";
-        ctx.fillText("Recordatorio", W / 2, 108);
+        // ── TEXTO ARRIBA — más grande y centrado en el espacio disponible ──
+        // Espacio arriba del KP: aprox y=0 a y=320
+        ctx.font = "bold 100px 'Playfair Display', serif";
+        ctx.fillText("Recordatorio", W / 2, 105);
 
-        ctx.font = "400 60px 'Playfair Display', serif";
-        ctx.fillText("Cantidad a pagar", W / 2, 192);
+        ctx.font = "400 76px 'Playfair Display', serif";
+        ctx.fillText("Cantidad a pagar", W / 2, 205);
 
-        // Precio con números normales — usando lining figures via unicode trick
-        ctx.font = "bold 70px 'Playfair Display', serif";
-        ctx.fillText(precioTexto, W / 2, 278);
+        ctx.font = "bold 88px 'Playfair Display', serif";
+        ctx.fillText(precioTexto, W / 2, 305);
 
-        // ── TEXTO ABAJO ───────────────────────────────────────────────
-        ctx.font = "400 54px 'Playfair Display', serif";
-        ctx.fillText("Plazo para cancelar tu", W / 2, 1092);
-        ctx.fillText("producto", W / 2, 1158);
+        // ── TEXTO ABAJO — más grande y centrado en el espacio disponible ──
+        // Espacio abajo del KP: aprox y=1050 a y=1536
+        ctx.font = "400 68px 'Playfair Display', serif";
+        ctx.fillText("Plazo para cancelar tu", W / 2, 1100);
+        ctx.fillText("producto", W / 2, 1180);
+
+        ctx.font = "400 80px 'Playfair Display', serif";
+        ctx.fillText(fecha, W / 2, 1275);
 
         ctx.font = "400 64px 'Playfair Display', serif";
-        ctx.fillText(fecha, W / 2, 1245);
-
-        ctx.font = "400 50px 'Playfair Display', serif";
-        ctx.fillText("Métodos de pago", W / 2, 1322);
-        ctx.fillText("-Efectivo", W / 2, 1390);
-        ctx.fillText("-Nequi 3008734383", W / 2, 1458);
+        ctx.fillText("Métodos de pago", W / 2, 1360);
+        ctx.fillText("-Efectivo", W / 2, 1435);
+        ctx.fillText("-Nequi 3008734383", W / 2, 1510);
 
         ctx.shadowColor = "transparent";
 
