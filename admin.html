@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KP Admin</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -69,58 +70,62 @@
     } else {
       const precioTexto = "$" + parseInt(total).toLocaleString('es-CO');
       const fecha = obtenerFechaFinMes();
-
       document.getElementById("total-pedido").textContent = "Último pedido: " + precioTexto;
 
+      // Cargar fuente Playfair Display antes de dibujar
+      document.fonts.ready.then(function () {
+        cargarImagen(precioTexto, fecha);
+      });
+    }
+
+    function cargarImagen(precioTexto, fecha) {
       const img = new Image();
       img.crossOrigin = "anonymous";
       img.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPG";
 
       img.onload = function () {
         const canvas = document.getElementById("canvas");
-        const W = img.width;   // 1024
-        const H = img.height;  // 1536
+        const W = img.width;
+        const H = img.height;
         canvas.width = W;
         canvas.height = H;
         const ctx = canvas.getContext("2d");
 
-        // Imagen original como fondo
         ctx.drawImage(img, 0, 0);
-
         ctx.textAlign = "center";
-        ctx.shadowColor = "rgba(0,0,0,0.9)";
-        ctx.shadowBlur = 15;
+        ctx.shadowColor = "rgba(0,0,0,0.95)";
+        ctx.shadowBlur = 18;
         ctx.shadowOffsetX = 2;
         ctx.shadowOffsetY = 2;
+        ctx.fillStyle = "#ffffff";
 
         // ── TEXTO ARRIBA ──────────────────────────────────────────────
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 82px Arial, sans-serif";
-        ctx.fillText("Recordatorio", W / 2, 105);
+        ctx.font = "bold 82px 'Playfair Display', serif";
+        ctx.fillText("Recordatorio", W / 2, 108);
 
-        ctx.font = "62px Arial, sans-serif";
-        ctx.fillText("Cantidad a pagar", W / 2, 190);
+        ctx.font = "400 60px 'Playfair Display', serif";
+        ctx.fillText("Cantidad a pagar", W / 2, 192);
 
-        ctx.font = "bold 72px Arial, sans-serif";
+        // Precio con números normales — usando lining figures via unicode trick
+        ctx.font = "bold 70px 'Playfair Display', serif";
         ctx.fillText(precioTexto, W / 2, 278);
 
         // ── TEXTO ABAJO ───────────────────────────────────────────────
-        ctx.font = "56px Arial, sans-serif";
-        ctx.fillText("Plazo para cancelar tu", W / 2, 1090);
+        ctx.font = "400 54px 'Playfair Display', serif";
+        ctx.fillText("Plazo para cancelar tu", W / 2, 1092);
         ctx.fillText("producto", W / 2, 1158);
 
-        ctx.font = "bold 65px Arial, sans-serif";
+        ctx.font = "400 64px 'Playfair Display', serif";
         ctx.fillText(fecha, W / 2, 1245);
 
-        ctx.font = "52px Arial, sans-serif";
-        ctx.fillText("Métodos de pago", W / 2, 1320);
-        ctx.fillText("-Efectivo", W / 2, 1388);
-        ctx.fillText("-Nequi 3008734383", W / 2, 1456);
+        ctx.font = "400 50px 'Playfair Display', serif";
+        ctx.fillText("Métodos de pago", W / 2, 1322);
+        ctx.fillText("-Efectivo", W / 2, 1390);
+        ctx.fillText("-Nequi 3008734383", W / 2, 1458);
 
         ctx.shadowColor = "transparent";
 
         const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
-
         const preview = document.getElementById("preview");
         preview.src = dataUrl;
         preview.style.display = "block";
