@@ -20,12 +20,11 @@
       gap: 20px;
     }
     h1 { color: #c8960c; font-size: 28px; }
-    #info { font-size: 18px; color: #aaa; }
     #total-pedido { font-size: 26px; color: #fff; font-weight: bold; }
     canvas { display: none; }
     #preview {
       max-width: 90vw;
-      max-height: 60vh;
+      max-height: 65vh;
       border: 2px solid #c8960c;
       border-radius: 8px;
       display: none;
@@ -46,7 +45,6 @@
 <body>
 
   <h1>KP Admin</h1>
-  <div id="info">Último pedido:</div>
   <div id="total-pedido"></div>
   <canvas id="canvas"></canvas>
   <img id="preview">
@@ -72,7 +70,7 @@
       const precioTexto = "$" + parseInt(total).toLocaleString('es-CO');
       const fecha = obtenerFechaFinMes();
 
-      document.getElementById("total-pedido").textContent = precioTexto;
+      document.getElementById("total-pedido").textContent = "Último pedido: " + precioTexto;
 
       const img = new Image();
       img.crossOrigin = "anonymous";
@@ -80,34 +78,66 @@
 
       img.onload = function () {
         const canvas = document.getElementById("canvas");
-        canvas.width = img.width;
-        canvas.height = img.height;
+        const W = img.width;   // 1024
+        const H = img.height;  // 1536
+        canvas.width = W;
+        canvas.height = H;
         const ctx = canvas.getContext("2d");
 
-        // Imagen original como fondo
+        // 1. Imagen original como fondo
         ctx.drawImage(img, 0, 0);
 
-        // Tapar precio original
-        ctx.fillStyle = "#0a0a0a";
-        ctx.fillRect(150, 310, 766, 130);
-
-        // Nuevo precio
-        ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 95px Georgia, serif";
+        // ── Fuente elegante igual a la imagen ──────────────────────────────
         ctx.textAlign = "center";
-        ctx.fillText(precioTexto, 533, 415);
 
-        // Tapar fecha original
-        ctx.fillStyle = "#0a0a0a";
-        ctx.fillRect(50, 1075, 966, 120);
+        // Sombra suave para legibilidad
+        ctx.shadowColor = "rgba(0,0,0,0.8)";
+        ctx.shadowBlur = 18;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
 
-        // Nueva fecha
+        // ── TEXTO ARRIBA ───────────────────────────────────────────────────
+
+        // "Recordatorio"
         ctx.fillStyle = "#ffffff";
-        ctx.font = "bold 95px Georgia, serif";
-        ctx.textAlign = "center";
-        ctx.fillText(fecha, 533, 1170);
+        ctx.font = "bold 85px Georgia, serif";
+        ctx.fillText("Recordatorio", W / 2, 110);
 
+        // "Cantidad a pagar"
+        ctx.font = "65px Georgia, serif";
+        ctx.fillText("Cantidad a pagar", W / 2, 195);
+
+        // PRECIO dinámico
+        ctx.font = "bold 75px Georgia, serif";
+        ctx.fillText(precioTexto, W / 2, 285);
+
+        // ── TEXTO ABAJO ────────────────────────────────────────────────────
+
+        // "Plazo para cancelar tu"
+        ctx.font = "58px Georgia, serif";
+        ctx.fillText("Plazo para cancelar tu", W / 2, 1095);
+
+        // "producto"
+        ctx.fillText("producto", W / 2, 1165);
+
+        // FECHA dinámica
+        ctx.font = "bold 68px Georgia, serif";
+        ctx.fillText(fecha, W / 2, 1255);
+
+        // "Métodos de pago"
+        ctx.font = "55px Georgia, serif";
+        ctx.fillText("Métodos de pago", W / 2, 1335);
+
+        // "-Efectivo"
+        ctx.fillText("-Efectivo", W / 2, 1405);
+
+        // "-Nequi 3008734383"
+        ctx.fillText("-Nequi 3008734383", W / 2, 1475);
+
+        // ── Mostrar resultado ──────────────────────────────────────────────
+        ctx.shadowColor = "transparent";
         const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+
         const preview = document.getElementById("preview");
         preview.src = dataUrl;
         preview.style.display = "block";
@@ -118,7 +148,7 @@
       };
 
       img.onerror = function () {
-        alert("No se pudo cargar la imagen base. Verifica que recordatorio.JPG esté en la carpeta img.");
+        alert("No se pudo cargar la imagen. Verifica que recordatorio.JPG esté en la carpeta img de GitHub.");
       };
     }
   </script>
