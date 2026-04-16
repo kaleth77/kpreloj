@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KP Admin - Generador de Recordatorio</title>
+  <title>KP Admin - Recordatorio</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,38 +17,35 @@
       justify-content: center;
       min-height: 100vh;
       padding: 20px;
-      gap: 16px;
+      gap: 15px;
     }
-    h1 { color: #c8960c; font-size: 26px; font-weight: 400; }
-    #total-pedido { font-size: 20px; color: #fff; margin-bottom: 10px; }
+    h1 { color: #c8960c; font-size: 24px; font-weight: 400; }
     canvas { display: none; }
     #preview {
-      max-width: 90vw;
-      max-height: 75vh;
+      max-width: 95vw;
+      max-height: 70vh;
       border: 1px solid #c8960c;
-      border-radius: 8px;
+      border-radius: 10px;
     }
     #btn-descargar {
       background: linear-gradient(135deg, #c8960c, #f5d060, #b8860b);
       color: #000;
       font-weight: bold;
       font-size: 18px;
-      padding: 12px 32px;
+      padding: 14px 35px;
       border-radius: 8px;
       text-decoration: none;
       display: none;
+      margin-top: 10px;
     }
-    #sin-pedido { font-size: 18px; color: #aaa; text-align: center; display: none; }
   </style>
 </head>
 <body>
 
   <h1>KP Admin</h1>
-  <div id="total-pedido"></div>
-  <a id="btn-descargar" download="recordatorio_kp.jpg">⬇️ Descargar imagen</a>
-  <img id="preview" style="display:none;">
+  <img id="preview" alt="Vista previa">
+  <a id="btn-descargar" download="pago_kp.jpg">⬇️ Descargar Recordatorio</a>
   <canvas id="canvas"></canvas>
-  <div id="sin-pedido">No hay pedidos registrados. Espera una compra.</div>
 
   <script>
     function obtenerFechaFinMes() {
@@ -58,24 +55,20 @@
       return `${ultimoDia} De ${meses[hoy.getMonth()]}`;
     }
 
-    // Función para dibujar solo los valores (Total y Fecha) en blanco.
-    function drawValueText(ctx, text, x, y, size) {
+    function drawValue(ctx, text, x, y, size) {
       ctx.save();
       ctx.textAlign = "center";
       ctx.fillStyle = "#ffffff";
-      
       const chars = text.split('');
       const widths = chars.map(ch => {
-        const isNum = /[0-9]/.test(ch);
+        const isNum = /[0-9$.,]/.test(ch);
         ctx.font = `400 ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
         return ctx.measureText(ch).width;
       });
-      
       let totalWidth = widths.reduce((a, b) => a + b, 0);
       let curX = x - totalWidth / 2;
-
       chars.forEach((ch, i) => {
-        const isNum = /[0-9]/.test(ch);
+        const isNum = /[0-9$.,]/.test(ch);
         ctx.font = `400 ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
         ctx.fillText(ch, curX + widths[i] / 2, y);
         curX += widths[i];
@@ -83,80 +76,70 @@
       ctx.restore();
     }
 
-    const total = localStorage.getItem("kp_ultimo_total");
+    const total = localStorage.getItem("kp_ultimo_total") || "0";
+    const precioTexto = "$" + parseInt(total).toLocaleString('es-CO');
+    const fechaTexto = obtenerFechaFinMes();
 
-    if (!total) {
-      document.getElementById("sin-pedido").style.display = "block";
-    } else {
-      const precioTexto = "$" + parseInt(total).toLocaleString('es-CO');
-      const fecha = obtenerFechaFinMes();
-      document.getElementById("total-pedido").textContent = "Total: " + precioTexto;
-      document.fonts.ready.then(() => cargarImagenes(precioTexto, fecha));
-    }
-
-    function cargarImagenes(precioTexto, fecha) {
+    document.fonts.ready.then(function () {
       const fondo = new Image();
       const qr = new Image();
       const llave = new Image();
+      
       fondo.crossOrigin = "anonymous";
       qr.crossOrigin = "anonymous";
       llave.crossOrigin = "anonymous";
 
-      // URLs de tus archivos separados en GitHub
+      // Tus archivos exactos de GitHub
       fondo.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPEG";
       qr.src = "https://kaleth77.github.io/kpreloj/img/qr.jpg";
       llave.src = "https://kaleth77.github.io/kpreloj/img/llave.jpg";
 
       fondo.onload = () => {
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = fondo.width;
-        canvas.height = fondo.height;
-
-        ctx.drawImage(fondo, 0, 0);
-
-        // --- UBICACIÓN DE VALORES (Solo rrellenar huecos) ---
-        
-        // 1. Dibujar el Total ($125.000) en el hueco superior.
-        // Coordenada y a 310 para que encaje bajo "Cantidad a pagar".
-        drawValueText(ctx, precioTexto, canvas.width/2, 310, 110);
-
-        // --- CARGAR QR Y LLAVE ---
         qr.onload = () => {
-          // 2. Dibujar el QR centrado en la parte media.
-          const qrW = 750; // Ancho del QR
-          const qrH = (qr.height * qrW) / qr.width;
-          const qrX = (canvas.width - qrW)/2; // Centrado horizontal
-          
-          // Coordenada y a 450 para que quede en el medio.
-          ctx.drawImage(qr, qrX, 450, qrW, qrH);
-
           llave.onload = () => {
-            // 3. Dibujar la Llave centrada justo debajo del QR.
-            const llaveW = 750; // Ancho de la llave (mismo que el QR)
-            const llaveH = (llave.height * llaveW) / llave.width;
-            const llaveX = (canvas.width - llaveW)/2; // Centrado horizontal
-            
-            // Coordenada y justo debajo del QR.
-            const llaveY = 450 + qrH + 80;
-            ctx.drawImage(llave, llaveX, llaveY, llaveW, llaveH);
+            const canvas = document.getElementById("canvas");
+            const ctx = canvas.getContext("2d");
+            canvas.width = fondo.width;
+            canvas.height = fondo.height;
 
-            // 4. Dibujar la Fecha (30 De Abril) en el hueco inferior.
-            // Coordenada y a 1050 para que encaje bajo "Fecha límite".
-            drawValueText(ctx, fecha, canvas.width/2, 1050, 95);
+            // 1. Dibujar el fondo (ya trae los títulos)
+            ctx.drawImage(fondo, 0, 0);
 
+            // 2. Dibujar el Valor (ajustado en el hueco superior)
+            drawValue(ctx, precioTexto, canvas.width/2, 330, 125);
+
+            // 3. Dibujar QR (Súper centrado y más arriba)
+            const qrW = 740;
+            const qrH = (qr.height * qrW) / qr.width;
+            const qrY = 430; // Posición más arriba
+            ctx.drawImage(qr, (canvas.width - qrW)/2, qrY, qrW, qrH);
+
+            // 4. Dibujar la Llave (debajo del QR)
+            const llW = 740;
+            const llH = (llave.height * llW) / llave.width;
+            const llY = qrY + qrH + 40; // Espacio pequeño entre QR y llave
+            ctx.drawImage(llave, (canvas.width - llW)/2, llY, llW, llH);
+
+            // 5. Dibujar la Fecha (en el hueco inferior, debajo del título del fondo)
+            drawValue(ctx, fechaTexto, canvas.width/2, 1150, 100);
+
+            // Generar vista previa
             const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
             const preview = document.getElementById("preview");
             preview.src = dataUrl;
             preview.style.display = "block";
-            
+
             const btn = document.getElementById("btn-descargar");
             btn.href = dataUrl;
-            btn.style.display = "block";
+            btn.style.display = "inline-block";
           };
         };
       };
-    }
+
+      fondo.onerror = () => console.error("Error cargando recordatorio.JPEG");
+      qr.onerror = () => console.error("Error cargando qr.jpg");
+      llave.onerror = () => console.error("Error cargando llave.jpg");
+    });
   </script>
 </body>
 </html>
