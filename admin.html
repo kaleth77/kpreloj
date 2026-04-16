@@ -96,11 +96,15 @@
     function cargarImagenes(precioTexto, fecha) {
       const fondo = new Image();
       const qr = new Image();
+      const llave = new Image();
       fondo.crossOrigin = "anonymous";
       qr.crossOrigin = "anonymous";
+      llave.crossOrigin = "anonymous";
 
+      // URLs de tus archivos en GitHub
       fondo.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPEG";
-      qr.src = "https://kaleth77.github.io/kpreloj/img/qr-llave.jpg";
+      qr.src = "https://kaleth77.github.io/kpreloj/img/qr.jpg";
+      llave.src = "https://kaleth77.github.io/kpreloj/img/llave.jpg";
 
       fondo.onload = () => {
         const canvas = document.getElementById("canvas");
@@ -110,52 +114,46 @@
 
         ctx.drawImage(fondo, 0, 0);
 
-        // --- UBICACIÓN DE TEXTOS LIMPIOS ---
-        // 1. Monto Grande Arriba (centrado)
-        drawMixedText(ctx, precioTexto, canvas.width/2, 175, 120);
+        // --- UBICACIÓN DE TEXTOS LIMPIOS ARRIBA ---
+        drawMixedText(ctx, "Recordatorio:", canvas.width/2, 100, 80);
+        drawMixedText(ctx, "Cantidad a pagar:", canvas.width/2, 200, 65);
+        drawMixedText(ctx, precioTexto, canvas.width/2, 300, 110);
 
-        // --- UBICACIÓN DEL QR ---
+        // Añadir Marca de Agua KP
+        ctx.font = "700 35px Arial, sans-serif";
+        ctx.fillStyle = "rgba(200, 150, 12, 0.4)";
+        ctx.textAlign = "center";
+        ctx.fillText("KP - kpreloj", canvas.width/2, 380);
+
+        // --- UBICACIÓN DEL QR EN EL CENTRO ---
         qr.onload = () => {
-          // 2. QR en el Medio (centrado)
-          const qrW = 700; // Ancho del QR
+          const qrW = 750; // Ancho del QR
           const qrH = (qr.height * qrW) / qr.width;
-          const qrY = (canvas.width - qrW)/2; // Centrado horizontal
-          ctx.drawImage(qr, qrY, 250, qrW, qrH);
+          const qrX = (canvas.width - qrW)/2; // Centrado horizontal
+          ctx.drawImage(qr, qrX, 450, qrW, qrH);
 
-          // 3. Fecha Abajo (debajo del QR, centrado)
-          drawMixedText(ctx, "Fecha límite de pago:", canvas.width/2, 980, 80);
-          drawMixedText(ctx, fecha, canvas.width/2, 1080, 95);
+          // --- UBICACIÓN DE LA LLAVE ABAJO ---
+          llave.onload = () => {
+            const llaveW = 750; // Ancho de la Llave
+            const llaveH = (llave.height * llaveW) / llave.width;
+            const llaveX = (canvas.width - llaveW)/2; // Centrado horizontal
+            const llaveY = 450 + qrH + 120; // Debajo del QR
+            ctx.drawImage(llave, llaveX, llaveY, llaveW, llaveH);
 
-          // 4. La Llave al Final (caja resaltada, centrada)
-          const llaveY = 1200;
-          ctx.font = "400 65px 'Playfair Display', serif";
-          ctx.fillStyle = "#ffffff";
-          ctx.textAlign = "center";
-          ctx.fillText("Usa tu llave de Bancolombia:", canvas.width/2, llaveY);
+            // 4. Textos de Fecha Limite al final (centrado, debajo de la llave)
+            const fechaY = llaveY + llaveH + 80;
+            drawMixedText(ctx, "Fecha límite de pago:", canvas.width/2, fechaY, 65);
+            drawMixedText(ctx, fecha, canvas.width/2, fechaY + 100, 85);
 
-          // Caja para la llave
-          const llaveBoxWidth = 800;
-          const llaveBoxHeight = 110;
-          const llaveBoxX = (canvas.width - llaveBoxWidth) / 2;
-          const llaveBoxY = llaveY + 20;
-          ctx.fillStyle = "rgba(255, 255, 255, 0.15)";
-          ctx.beginPath();
-          ctx.roundRect(llaveBoxX, llaveBoxY, llaveBoxWidth, llaveBoxHeight, 15);
-          ctx.fill();
-
-          // Número de llave (centrado en la caja)
-          ctx.font = "700 75px 'Playfair Display', serif";
-          ctx.fillStyle = "#ffffff";
-          ctx.fillText("0091983331", canvas.width/2, llaveBoxY + 75);
-
-          const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
-          const preview = document.getElementById("preview");
-          preview.src = dataUrl;
-          preview.style.display = "block";
-          
-          const btn = document.getElementById("btn-descargar");
-          btn.href = dataUrl;
-          btn.style.display = "block";
+            const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+            const preview = document.getElementById("preview");
+            preview.src = dataUrl;
+            preview.style.display = "block";
+            
+            const btn = document.getElementById("btn-descargar");
+            btn.href = dataUrl;
+            btn.style.display = "block";
+          };
         };
       };
     }
