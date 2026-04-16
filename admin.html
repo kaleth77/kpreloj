@@ -108,22 +108,27 @@
             // 2. Dibujar el Valor (ajustado en el hueco superior)
             drawValue(ctx, precioTexto, canvas.width/2, 290, 105);
 
-            // --- TEXTO DORADO ENCIMA DEL QR ---
+           // --- TEXTO DORADO ENCIMA DEL QR ---
 ctx.save();
 ctx.textAlign = "center";
-// Creamos el degradado dorado para que brille
-let gradient = ctx.createLinearGradient(0, 400, 0, 450);
+// Degradado dorado elegante
+let gradient = ctx.createLinearGradient(0, 480, 0, 520);
 gradient.addColorStop(0, "#c8960c"); // Dorado oscuro
 gradient.addColorStop(0.5, "#f5d060"); // Dorado claro
 gradient.addColorStop(1, "#b8860b"); // Dorado medio
 
 ctx.fillStyle = gradient;
-ctx.font = "bold 40px Arial, sans-serif"; // Puedes cambiar el 40 si lo quieres más grande o chico
-ctx.shadowColor = "rgba(0,0,0,0.5)"; // Una sombra suave para que resalte
-ctx.shadowBlur = 4;
-ctx.fillText("ten en cuenta que sale a nombre de KPSTORE", canvas.width/2, 450); // El 410 lo mueve arriba/abajo
-ctx.restore();
+// El 30px es para que quepa bien en el hueco
+ctx.font = "bold 30px Arial, sans-serif"; 
+// Sombra sutil para legibilidad
+ctx.shadowColor = "rgba(0,0,0,0.5)"; 
+ctx.shadowBlur = 3;
 
+// --- DIBUJAR EL TEXTO ---
+// El 505 es la coordenada Y, ajustada para el hueco blanco.
+// El texto aparecerá encima de "Kpstore Kaleth Manuel Perez..."
+ctx.fillText("ten en cuenta que sale a nombre de KPSTORE", canvas.width/2, 505); 
+ctx.restore();
             // 3. Dibujar QR (Súper centrado y más arriba)
             const qrW = 740;
             const qrH = (qr.height * qrW) / qr.width;
