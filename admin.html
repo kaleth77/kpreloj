@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KP Admin</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: #0a0a0a;
       color: #fff;
-      font-family: Arial, sans-serif;
+      font-family: 'Playfair Display', serif;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -23,8 +23,8 @@
     #total-pedido { font-size: 20px; color: #fff; }
     canvas { display: none; }
     #preview {
-      max-width: 90vw;
-      max-height: 70vh;
+      max-width: 95vw;
+      max-height: 75vh;
       border: 1px solid #c8960c;
       border-radius: 8px;
     }
@@ -37,13 +37,14 @@
       border-radius: 8px;
       text-decoration: none;
       display: none;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
   <h1>KP Admin</h1>
-  <div id="total-pedido">Cargando datos...</div>
+  <div id="total-pedido">Cargando...</div>
   <img id="preview" style="display:none;">
   <a id="btn-descargar" download="recordatorio_kp.jpg">⬇️ Descargar imagen</a>
   <canvas id="canvas"></canvas>
@@ -54,28 +55,6 @@
       const ultimoDia = new Date(hoy.getFullYear(), hoy.getMonth() + 1, 0).getDate();
       const meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
       return `${ultimoDia} De ${meses[hoy.getMonth()]}`;
-    }
-
-    function drawMixedText(ctx, text, x, y, size) {
-      ctx.save();
-      ctx.textAlign = "center";
-      ctx.fillStyle = "#ffffff";
-      const chars = text.split('');
-      const widths = chars.map(ch => {
-        const isNum = /[0-9]/.test(ch);
-        // Sin negrillas (400)
-        ctx.font = `400 ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
-        return ctx.measureText(ch).width;
-      });
-      let totalWidth = widths.reduce((a, b) => a + b, 0);
-      let curX = x - totalWidth / 2;
-      chars.forEach((ch, i) => {
-        const isNum = /[0-9]/.test(ch);
-        ctx.font = `400 ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
-        ctx.fillText(ch, curX + widths[i] / 2, y);
-        curX += widths[i];
-      });
-      ctx.restore();
     }
 
     const total = localStorage.getItem("kp_ultimo_total") || "0";
@@ -89,7 +68,6 @@
       fondo.crossOrigin = "anonymous";
       qr.crossOrigin = "anonymous";
 
-      // USANDO LOS NOMBRES EXACTOS DE TU GITHUB
       fondo.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPEG";
       qr.src = "https://kaleth77.github.io/kpreloj/img/qr-llave.jpg";
 
@@ -97,22 +75,29 @@
         qr.onload = function () {
           const canvas = document.getElementById("canvas");
           const ctx = canvas.getContext("2d");
+          
           canvas.width = fondo.width;
           canvas.height = fondo.height;
 
-          // 1. Dibujar el fondo con marcas de agua
+          // 1. Fondo
           ctx.drawImage(fondo, 0, 0);
 
-          // 2. Escribir Total debajo de "Cantidad a pagar"
-          drawMixedText(ctx, precioTexto, canvas.width/2, 175, 115);
+          // Configuración de texto uniforme
+          ctx.fillStyle = "#ffffff";
+          ctx.textAlign = "center";
+          ctx.font = "400 110px 'Playfair Display', serif";
 
-          // 3. Escribir Fecha debajo de "Fecha límite de pago"
-          drawMixedText(ctx, fecha, canvas.width/2, 985, 95);
+          // 2. Total (Ubicado en el hueco superior)
+          ctx.fillText(precioTexto, canvas.width/2, 330);
 
-          // 4. Dibujar QR y Llave al final
-          const qrW = 750; 
+          // 3. Fecha (Misma fuente que el total, ubicado en el hueco inferior)
+          ctx.font = "400 90px 'Playfair Display', serif";
+          ctx.fillText(fecha, canvas.width/2, 1150);
+
+          // 4. QR (Centrado al final)
+          const qrW = 720; 
           const qrH = (qr.height * qrW) / qr.width;
-          ctx.drawImage(qr, (canvas.width - qrW)/2, 1100, qrW, qrH);
+          ctx.drawImage(qr, (canvas.width - qrW)/2, 1260, qrW, qrH);
 
           const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
           const preview = document.getElementById("preview");
@@ -124,10 +109,6 @@
           btn.style.display = "inline-block";
         };
       };
-      
-      // Alerta por si algún nombre sigue mal
-      fondo.onerror = () => alert("Error cargando recordatorio.JPEG");
-      qr.onerror = () => alert("Error cargando qr-llave.jpg");
     });
   </script>
 </body>
