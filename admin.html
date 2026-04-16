@@ -27,7 +27,6 @@
       max-height: 70vh;
       border: 1px solid #c8960c;
       border-radius: 8px;
-      display: none;
     }
     #btn-descargar {
       background: linear-gradient(135deg, #c8960c, #f5d060, #b8860b);
@@ -44,9 +43,9 @@
 <body>
 
   <h1>KP Admin</h1>
-  <div id="total-pedido">Cargando...</div>
+  <div id="total-pedido">Cargando datos...</div>
+  <img id="preview" style="display:none;">
   <a id="btn-descargar" download="recordatorio_kp.jpg">⬇️ Descargar imagen</a>
-  <img id="preview">
   <canvas id="canvas"></canvas>
 
   <script>
@@ -64,7 +63,7 @@
       const chars = text.split('');
       const widths = chars.map(ch => {
         const isNum = /[0-9]/.test(ch);
-        // Quitamos 'bold' para que sea letra normal
+        // Sin negrillas (400)
         ctx.font = `400 ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
         return ctx.measureText(ch).width;
       });
@@ -90,9 +89,9 @@
       fondo.crossOrigin = "anonymous";
       qr.crossOrigin = "anonymous";
 
-      // Tus archivos en GitHub
+      // USANDO LOS NOMBRES EXACTOS DE TU GITHUB
       fondo.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPEG";
-      qr.src = "https://kaleth77.github.io/kpreloj/img/Qr-llave.jpg";
+      qr.src = "https://kaleth77.github.io/kpreloj/img/qr-llave.jpg";
 
       fondo.onload = function () {
         qr.onload = function () {
@@ -101,21 +100,20 @@
           canvas.width = fondo.width;
           canvas.height = fondo.height;
 
-          // Dibujar el fondo con la marca de agua
+          // 1. Dibujar el fondo con marcas de agua
           ctx.drawImage(fondo, 0, 0);
 
-          // Escribir solo el total (ajustado al hueco de tu imagen)
-          drawMixedText(ctx, precioTexto, canvas.width/2, 335, 110);
+          // 2. Escribir Total debajo de "Cantidad a pagar"
+          drawMixedText(ctx, precioTexto, canvas.width/2, 175, 115);
 
-          // Escribir solo la fecha (ajustado al hueco inferior)
-          drawMixedText(ctx, fecha, canvas.width/2, 1155, 95);
+          // 3. Escribir Fecha debajo de "Fecha límite de pago"
+          drawMixedText(ctx, fecha, canvas.width/2, 985, 95);
 
-          // Dibujar el QR centrado abajo
-          const qrW = 700; // Ancho del QR
+          // 4. Dibujar QR y Llave al final
+          const qrW = 750; 
           const qrH = (qr.height * qrW) / qr.width;
-          ctx.drawImage(qr, (canvas.width - qrW)/2, 1260, qrW, qrH);
+          ctx.drawImage(qr, (canvas.width - qrW)/2, 1100, qrW, qrH);
 
-          // Generar vista previa
           const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
           const preview = document.getElementById("preview");
           preview.src = dataUrl;
@@ -126,8 +124,11 @@
           btn.style.display = "inline-block";
         };
       };
+      
+      // Alerta por si algún nombre sigue mal
+      fondo.onerror = () => alert("Error cargando recordatorio.JPEG");
+      qr.onerror = () => alert("Error cargando qr-llave.jpg");
     });
   </script>
-
 </body>
 </html>
