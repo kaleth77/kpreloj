@@ -108,7 +108,14 @@
             // 2. Dibujar el Valor (ajustado en el hueco superior)
             drawValue(ctx, precioTexto, canvas.width/2, 290, 105);
 
-           // --- TEXTO DORADO ENCIMA DEL QR ---
+         
+            // 3. Dibujar QR (Súper centrado y más arriba)
+            const qrW = 740;
+            const qrH = (qr.height * qrW) / qr.width;
+            const qrY = 330; // Posición más arriba
+            ctx.drawImage(qr, (canvas.width - qrW)/2, qrY, qrW, qrH);
+
+              // --- TEXTO DORADO ENCIMA DEL QR ---
 ctx.save();
 ctx.textAlign = "center";
 // Degradado dorado elegante
@@ -129,11 +136,6 @@ ctx.shadowBlur = 3;
 // El texto aparecerá encima de "Kpstore Kaleth Manuel Perez..."
 ctx.fillText("ten en cuenta que sale a nombre de KPSTORE", canvas.width/2, 505); 
 ctx.restore();
-            // 3. Dibujar QR (Súper centrado y más arriba)
-            const qrW = 740;
-            const qrH = (qr.height * qrW) / qr.width;
-            const qrY = 330; // Posición más arriba
-            ctx.drawImage(qr, (canvas.width - qrW)/2, qrY, qrW, qrH);
 
             // 4. Dibujar la Llave (debajo del QR)
             const llW = 740;
