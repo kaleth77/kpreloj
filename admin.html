@@ -58,13 +58,7 @@
       return `${ultimoDia} De ${meses[hoy.getMonth()]}`;
     }
 
-    // MODIFICADA: Ahora esta función no dibuja nada para no duplicar títulos.
-    function drawMixedText(ctx, text, x, y, size) {
-      // Función vacía intencionalmente. Los títulos están en la imagen de fondo.
-      // Puedes borrar esta función si prefieres limpiar el código.
-    }
-
-    // NUEVA: Función para dibujar solo los valores (Total y Fecha) en blanco.
+    // Función para dibujar solo los valores (Total y Fecha) en blanco.
     function drawValueText(ctx, text, x, y, size) {
       ctx.save();
       ctx.textAlign = "center";
@@ -103,12 +97,15 @@
     function cargarImagenes(precioTexto, fecha) {
       const fondo = new Image();
       const qr = new Image();
+      const llave = new Image();
       fondo.crossOrigin = "anonymous";
       qr.crossOrigin = "anonymous";
+      llave.crossOrigin = "anonymous";
 
-      // Tus archivos en GitHub
+      // URLs de tus archivos separados en GitHub
       fondo.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPEG";
-      qr.src = "https://kaleth77.github.io/kpreloj/img/qr-llave.jpg";
+      qr.src = "https://kaleth77.github.io/kpreloj/img/qr.jpg";
+      llave.src = "https://kaleth77.github.io/kpreloj/img/llave.jpg";
 
       fondo.onload = () => {
         const canvas = document.getElementById("canvas");
@@ -121,32 +118,42 @@
         // --- UBICACIÓN DE VALORES (Solo rrellenar huecos) ---
         
         // 1. Dibujar el Total ($125.000) en el hueco superior.
-        // Ajusté la coordenada y a 310 para que encaje bajo "Cantidad a pagar".
+        // Coordenada y a 310 para que encaje bajo "Cantidad a pagar".
         drawValueText(ctx, precioTexto, canvas.width/2, 310, 110);
 
-        // --- UBICACIÓN DEL QR Y LLAVE ---
+        // --- CARGAR QR Y LLAVE ---
         qr.onload = () => {
-          // 2. Dibujar el QR y llave centrado en la parte inferior.
+          // 2. Dibujar el QR centrado en la parte media.
           const qrW = 750; // Ancho del QR
           const qrH = (qr.height * qrW) / qr.width;
           const qrX = (canvas.width - qrW)/2; // Centrado horizontal
           
-          // Ajusté la coordenada y a 450 para que quede en el medio.
+          // Coordenada y a 450 para que quede en el medio.
           ctx.drawImage(qr, qrX, 450, qrW, qrH);
 
-          // 3. Dibujar la Fecha (30 De Abril) en el hueco inferior.
-          // Ajusté la coordenada y a 1050 para que encaje bajo "Fecha límite".
-          const fechaY = 450 + qrH + 80;
-          drawValueText(ctx, fecha, canvas.width/2, fechaY, 95);
+          llave.onload = () => {
+            // 3. Dibujar la Llave centrada justo debajo del QR.
+            const llaveW = 750; // Ancho de la llave (mismo que el QR)
+            const llaveH = (llave.height * llaveW) / llave.width;
+            const llaveX = (canvas.width - llaveW)/2; // Centrado horizontal
+            
+            // Coordenada y justo debajo del QR.
+            const llaveY = 450 + qrH + 80;
+            ctx.drawImage(llave, llaveX, llaveY, llaveW, llaveH);
 
-          const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
-          const preview = document.getElementById("preview");
-          preview.src = dataUrl;
-          preview.style.display = "block";
-          
-          const btn = document.getElementById("btn-descargar");
-          btn.href = dataUrl;
-          btn.style.display = "block";
+            // 4. Dibujar la Fecha (30 De Abril) en el hueco inferior.
+            // Coordenada y a 1050 para que encaje bajo "Fecha límite".
+            drawValueText(ctx, fecha, canvas.width/2, 1050, 95);
+
+            const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+            const preview = document.getElementById("preview");
+            preview.src = dataUrl;
+            preview.style.display = "block";
+            
+            const btn = document.getElementById("btn-descargar");
+            btn.href = dataUrl;
+            btn.style.display = "block";
+          };
         };
       };
     }
