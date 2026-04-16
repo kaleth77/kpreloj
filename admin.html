@@ -111,13 +111,13 @@
             // 3. Dibujar QR (Súper centrado y más arriba)
             const qrW = 740;
             const qrH = (qr.height * qrW) / qr.width;
-            const qrY = 360; // Posición más arriba
+            const qrY = 340; // Posición más arriba
             ctx.drawImage(qr, (canvas.width - qrW)/2, qrY, qrW, qrH);
 
             // 4. Dibujar la Llave (debajo del QR)
             const llW = 740;
             const llH = (llave.height * llW) / llave.width;
-            const llY = qrY + qrH + 7; // Espacio pequeño entre QR y llave
+            const llY = qrY + qrH + 5; // Espacio pequeño entre QR y llave
             ctx.drawImage(llave, (canvas.width - llW)/2, llY, llW, llH);
 
             // 5. Dibujar la Fecha (en el hueco inferior, debajo del título del fondo)
