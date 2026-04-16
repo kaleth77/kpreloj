@@ -20,13 +20,14 @@
       gap: 16px;
     }
     h1 { color: #c8960c; font-size: 26px; font-weight: 400; }
-    #total-pedido { font-size: 20px; color: #fff; margin-bottom: 10px; }
+    #total-pedido { font-size: 20px; color: #fff; }
     canvas { display: none; }
     #preview {
       max-width: 90vw;
-      max-height: 75vh;
+      max-height: 70vh;
       border: 1px solid #c8960c;
       border-radius: 8px;
+      display: none;
     }
     #btn-descargar {
       background: linear-gradient(135deg, #c8960c, #f5d060, #b8860b);
@@ -38,17 +39,15 @@
       text-decoration: none;
       display: none;
     }
-    #sin-pedido { font-size: 18px; color: #aaa; text-align: center; display: none; }
   </style>
 </head>
 <body>
 
   <h1>KP Admin</h1>
-  <div id="total-pedido"></div>
+  <div id="total-pedido">Cargando...</div>
   <a id="btn-descargar" download="recordatorio_kp.jpg">⬇️ Descargar imagen</a>
-  <img id="preview" style="display:none;">
+  <img id="preview">
   <canvas id="canvas"></canvas>
-  <div id="sin-pedido">No hay pedidos registrados.</div>
 
   <script>
     function obtenerFechaFinMes() {
@@ -62,17 +61,15 @@
       ctx.save();
       ctx.textAlign = "center";
       ctx.fillStyle = "#ffffff";
-      
       const chars = text.split('');
       const widths = chars.map(ch => {
         const isNum = /[0-9]/.test(ch);
+        // Quitamos 'bold' para que sea letra normal
         ctx.font = `400 ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
         return ctx.measureText(ch).width;
       });
-      
       let totalWidth = widths.reduce((a, b) => a + b, 0);
       let curX = x - totalWidth / 2;
-
       chars.forEach((ch, i) => {
         const isNum = /[0-9]/.test(ch);
         ctx.font = `400 ${size}px ${isNum ? 'Arial' : "'Playfair Display', serif"}`;
@@ -82,61 +79,55 @@
       ctx.restore();
     }
 
-    const total = localStorage.getItem("kp_ultimo_total");
+    const total = localStorage.getItem("kp_ultimo_total") || "0";
+    const precioTexto = "$" + parseInt(total).toLocaleString('es-CO');
+    const fecha = obtenerFechaFinMes();
+    document.getElementById("total-pedido").textContent = "Total: " + precioTexto;
 
-    if (!total) {
-      document.getElementById("sin-pedido").style.display = "block";
-    } else {
-      const precioTexto = "$" + parseInt(total).toLocaleString('es-CO');
-      const fecha = obtenerFechaFinMes();
-      document.getElementById("total-pedido").textContent = "Total: " + precioTexto;
-      document.fonts.ready.then(() => cargarImagenes(precioTexto, fecha));
-    }
-
-    function cargarImagenes(precioTexto, fecha) {
+    document.fonts.ready.then(function () {
       const fondo = new Image();
       const qr = new Image();
       fondo.crossOrigin = "anonymous";
       qr.crossOrigin = "anonymous";
 
-      // URLs de tus archivos
+      // Tus archivos en GitHub
       fondo.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPEG";
       qr.src = "https://kaleth77.github.io/kpreloj/img/Qr-llave.jpg";
 
-      fondo.onload = () => {
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = fondo.width;
-        canvas.height = fondo.height;
+      fondo.onload = function () {
+        qr.onload = function () {
+          const canvas = document.getElementById("canvas");
+          const ctx = canvas.getContext("2d");
+          canvas.width = fondo.width;
+          canvas.height = fondo.height;
 
-        ctx.drawImage(fondo, 0, 0);
+          // Dibujar el fondo con la marca de agua
+          ctx.drawImage(fondo, 0, 0);
 
-        // --- UBICACIÓN DE TEXTOS ---
-        // Precio: Justo debajo de "Cantidad a pagar"
-        drawMixedText(ctx, precioTexto, canvas.width/2, 165, 110);
+          // Escribir solo el total (ajustado al hueco de tu imagen)
+          drawMixedText(ctx, precioTexto, canvas.width/2, 335, 110);
 
-        // Fecha: Justo debajo de "Fecha límite de pago"
-        drawMixedText(ctx, fecha, canvas.width/2, 980, 95);
+          // Escribir solo la fecha (ajustado al hueco inferior)
+          drawMixedText(ctx, fecha, canvas.width/2, 1155, 95);
 
-        // --- UBICACIÓN DEL QR ---
-        qr.onload = () => {
-          const qrW = 600; // Tamaño del QR
+          // Dibujar el QR centrado abajo
+          const qrW = 700; // Ancho del QR
           const qrH = (qr.height * qrW) / qr.width;
-          const qrY = 1100; // Posición vertical al final
-          
-          ctx.drawImage(qr, (canvas.width - qrW)/2, qrY, qrW, qrH);
+          ctx.drawImage(qr, (canvas.width - qrW)/2, 1260, qrW, qrH);
 
+          // Generar vista previa
           const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
           const preview = document.getElementById("preview");
           preview.src = dataUrl;
           preview.style.display = "block";
-          
+
           const btn = document.getElementById("btn-descargar");
           btn.href = dataUrl;
-          btn.style.display = "block";
+          btn.style.display = "inline-block";
         };
       };
-    }
+    });
   </script>
+
 </body>
 </html>
