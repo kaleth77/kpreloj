@@ -58,7 +58,14 @@
       return `${ultimoDia} De ${meses[hoy.getMonth()]}`;
     }
 
+    // MODIFICADA: Ahora esta función no dibuja nada para no duplicar títulos.
     function drawMixedText(ctx, text, x, y, size) {
+      // Función vacía intencionalmente. Los títulos están en la imagen de fondo.
+      // Puedes borrar esta función si prefieres limpiar el código.
+    }
+
+    // NUEVA: Función para dibujar solo los valores (Total y Fecha) en blanco.
+    function drawValueText(ctx, text, x, y, size) {
       ctx.save();
       ctx.textAlign = "center";
       ctx.fillStyle = "#ffffff";
@@ -96,15 +103,12 @@
     function cargarImagenes(precioTexto, fecha) {
       const fondo = new Image();
       const qr = new Image();
-      const llave = new Image();
       fondo.crossOrigin = "anonymous";
       qr.crossOrigin = "anonymous";
-      llave.crossOrigin = "anonymous";
 
-      // URLs de tus archivos en GitHub
+      // Tus archivos en GitHub
       fondo.src = "https://kaleth77.github.io/kpreloj/img/recordatorio.JPEG";
-      qr.src = "https://kaleth77.github.io/kpreloj/img/qr.jpg";
-      llave.src = "https://kaleth77.github.io/kpreloj/img/llave.jpg";
+      qr.src = "https://kaleth77.github.io/kpreloj/img/qr-llave.jpg";
 
       fondo.onload = () => {
         const canvas = document.getElementById("canvas");
@@ -114,46 +118,35 @@
 
         ctx.drawImage(fondo, 0, 0);
 
-        // --- UBICACIÓN DE TEXTOS LIMPIOS ARRIBA ---
-        drawMixedText(ctx, "Recordatorio:", canvas.width/2, 100, 80);
-        drawMixedText(ctx, "Cantidad a pagar:", canvas.width/2, 200, 65);
-        drawMixedText(ctx, precioTexto, canvas.width/2, 300, 110);
+        // --- UBICACIÓN DE VALORES (Solo rrellenar huecos) ---
+        
+        // 1. Dibujar el Total ($125.000) en el hueco superior.
+        // Ajusté la coordenada y a 310 para que encaje bajo "Cantidad a pagar".
+        drawValueText(ctx, precioTexto, canvas.width/2, 310, 110);
 
-        // Añadir Marca de Agua KP
-        ctx.font = "700 35px Arial, sans-serif";
-        ctx.fillStyle = "rgba(200, 150, 12, 0.4)";
-        ctx.textAlign = "center";
-        ctx.fillText("KP - kpreloj", canvas.width/2, 380);
-
-        // --- UBICACIÓN DEL QR EN EL CENTRO ---
+        // --- UBICACIÓN DEL QR Y LLAVE ---
         qr.onload = () => {
+          // 2. Dibujar el QR y llave centrado en la parte inferior.
           const qrW = 750; // Ancho del QR
           const qrH = (qr.height * qrW) / qr.width;
           const qrX = (canvas.width - qrW)/2; // Centrado horizontal
+          
+          // Ajusté la coordenada y a 450 para que quede en el medio.
           ctx.drawImage(qr, qrX, 450, qrW, qrH);
 
-          // --- UBICACIÓN DE LA LLAVE ABAJO ---
-          llave.onload = () => {
-            const llaveW = 750; // Ancho de la Llave
-            const llaveH = (llave.height * llaveW) / llave.width;
-            const llaveX = (canvas.width - llaveW)/2; // Centrado horizontal
-            const llaveY = 450 + qrH + 120; // Debajo del QR
-            ctx.drawImage(llave, llaveX, llaveY, llaveW, llaveH);
+          // 3. Dibujar la Fecha (30 De Abril) en el hueco inferior.
+          // Ajusté la coordenada y a 1050 para que encaje bajo "Fecha límite".
+          const fechaY = 450 + qrH + 80;
+          drawValueText(ctx, fecha, canvas.width/2, fechaY, 95);
 
-            // 4. Textos de Fecha Limite al final (centrado, debajo de la llave)
-            const fechaY = llaveY + llaveH + 80;
-            drawMixedText(ctx, "Fecha límite de pago:", canvas.width/2, fechaY, 65);
-            drawMixedText(ctx, fecha, canvas.width/2, fechaY + 100, 85);
-
-            const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
-            const preview = document.getElementById("preview");
-            preview.src = dataUrl;
-            preview.style.display = "block";
-            
-            const btn = document.getElementById("btn-descargar");
-            btn.href = dataUrl;
-            btn.style.display = "block";
-          };
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.95);
+          const preview = document.getElementById("preview");
+          preview.src = dataUrl;
+          preview.style.display = "block";
+          
+          const btn = document.getElementById("btn-descargar");
+          btn.href = dataUrl;
+          btn.style.display = "block";
         };
       };
     }
