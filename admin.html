@@ -108,6 +108,22 @@
             // 2. Dibujar el Valor (ajustado en el hueco superior)
             drawValue(ctx, precioTexto, canvas.width/2, 290, 105);
 
+            // --- TEXTO DORADO ENCIMA DEL QR ---
+ctx.save();
+ctx.textAlign = "center";
+// Creamos el degradado dorado para que brille
+let gradient = ctx.createLinearGradient(0, 400, 0, 450);
+gradient.addColorStop(0, "#c8960c"); // Dorado oscuro
+gradient.addColorStop(0.5, "#f5d060"); // Dorado claro
+gradient.addColorStop(1, "#b8860b"); // Dorado medio
+
+ctx.fillStyle = gradient;
+ctx.font = "bold 40px Arial, sans-serif"; // Puedes cambiar el 40 si lo quieres más grande o chico
+ctx.shadowColor = "rgba(0,0,0,0.5)"; // Una sombra suave para que resalte
+ctx.shadowBlur = 4;
+ctx.fillText("ten en cuenta que sale a nombre de KPSTORE", canvas.width/2, 410); // El 410 lo mueve arriba/abajo
+ctx.restore();
+
             // 3. Dibujar QR (Súper centrado y más arriba)
             const qrW = 740;
             const qrH = (qr.height * qrW) / qr.width;
