@@ -56,15 +56,15 @@ function actualizarCarrito() {
 }
 
 function comprarWhatsApp() {
+
   if (carrito.length === 0) {
     alert("El carrito está vacío");
     return;
   }
 
   let mensaje =
-  "🛒 *NUEVO PEDIDO KP* 🛒" +
-
-  "\n\n📦 *PRODUCTOS:*";
+  "\uD83D\uDED2 *NUEVO PEDIDO KP* \uD83D\uDED2" +   // 🛒
+  "\n\n\uD83D\uDCE6 *PRODUCTOS:*";               // 📦
 
   let total = 0;
 
@@ -72,11 +72,9 @@ function comprarWhatsApp() {
 
     mensaje +=
 
-    "\n\n⌚ *" + producto.nombre + "*" +
-
-    "\n💰 Precio: $" + producto.precio.toLocaleString('es-CO') +
-
-    "\n🖼️ Imagen: " + producto.imagen;
+    "\n\n\u231A *" + producto.nombre + "*" +     // ⌚
+    "\n\uD83D\uDCB0 Precio: $" + producto.precio.toLocaleString('es-CO') +  // 💰
+    "\n\uD83D\uDDBC\uFE0F Imagen: " + producto.imagen; // 🖼️
 
     total += producto.precio;
 
@@ -84,21 +82,17 @@ function comprarWhatsApp() {
 
   mensaje +=
 
-  "\n\n━━━━━━━━━━━━━━" +
+  "\n\n\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500" + // línea ─────
 
-  "\n💵 *TOTAL:* $" + total.toLocaleString('es-CO') +
+  "\n\uD83D\uDCB5 *TOTAL:* $" + total.toLocaleString('es-CO') +   // 💵
 
-  "\n\n📍 *DATOS DE ENTREGA*" +
+  "\n\n\uD83D\uDCCD *DATOS DE ENTREGA*" + // 📍
+  "\n\uD83D\uDC64 Nombre:" +             // 👤
+  "\n\uD83D\uDCDE Teléfono:" +           // 📞
+  "\n\uD83C\uDFE0 Dirección:" +          // 🏠
+  "\n\uD83D\uDCCD Referencia:" +         // 📌
 
-  "\n👤 Nombre:" +
-
-  "\n📞 Teléfono:" +
-
-  "\n🏠 Dirección:" +
-
-  "\n📌 Referencia:" +
-
-  "\n\n✨ Gracias por comprar en *KP Relojes* ⌚";
+  "\n\n\u2728 Gracias por comprar en *KP Relojes* \u231A"; // ✨⌚
 
   localStorage.setItem("kp_ultimo_total", total);
 
@@ -112,4 +106,3 @@ function comprarWhatsApp() {
   guardarCarrito();
   actualizarCarrito();
 }
- 
