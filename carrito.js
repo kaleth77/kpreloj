@@ -61,7 +61,7 @@ function comprarWhatsApp() {
     return;
   }
 
-  let mensaje = "\uD83D\uDED2 PEDIDO KP \uD83D\uDED2\n\n";
+  let mensaje = "\uD83D\uDED2 PEDIDO KP prueba pa ve \uD83D\uDED2\n\n";
 mensaje += "\uD83D\uDCE6 PRODUCTOS:\n\n";
 
 let total = 0;
