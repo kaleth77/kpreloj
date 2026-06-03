@@ -61,23 +61,22 @@ function comprarWhatsApp() {
     return;
   }
 
- let mensaje = "🛒 PEDIDO KP\n\n";
-mensaje += "📦 Productos:\n\n";
+  let mensaje = "[PEDIDO KP]\n\n";
+  mensaje += "[PRODUCTOS]\n\n";
 
-let total = 0;
+  let total = 0;
 
-carrito.forEach(producto => {
-  mensaje += "• " + producto.nombre +
-             " - $" + producto.precio.toLocaleString('es-CO') +
-             "\n🖼️ Imagen: " + producto.imagen +
-             "\n\n";
-  total += producto.precio;
-});
+  carrito.forEach(producto => {
+    mensaje += "• " + producto.nombre +
+               " - $" + producto.precio.toLocaleString('es-CO') +
+               "\n[Imagen]: " + producto.imagen +
+               "\n\n";
+    total += producto.precio;
+  });
 
-mensaje += "💰 Total: $" + total.toLocaleString('es-CO');
-mensaje += "\n\n📍 Enviar datos de entrega.";
+  mensaje += "[TOTAL]: $" + total.toLocaleString('es-CO');
+  mensaje += "\n\n[DATOS DE ENTREGA]";
 
-  // Guardar el total del último pedido para el admin
   localStorage.setItem("kp_ultimo_total", total);
 
   const url = "https://wa.me/573008734383?text=" + encodeURIComponent(mensaje);
@@ -87,5 +86,3 @@ mensaje += "\n\n📍 Enviar datos de entrega.";
   guardarCarrito();
   actualizarCarrito();
 }
-
-document.addEventListener("DOMContentLoaded", actualizarCarrito);
