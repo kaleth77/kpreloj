@@ -61,28 +61,55 @@ function comprarWhatsApp() {
     return;
   }
 
-  let mensaje = "🚀 PEDIDO KP 🚀\n\n";
-mensaje += "📦 PRODUCTOS:\n\n";
+  let mensaje =
+  "🛒 *NUEVO PEDIDO KP* 🛒" +
 
-let total = 0;
+  "\n\n📦 *PRODUCTOS:*";
 
-carrito.forEach(producto => {
-  mensaje += "• " + producto.nombre +
-             " - $" + producto.precio.toLocaleString('es-CO') +
-             "\n\uD83D\uDD17 Imagen: " + producto.imagen +
-             "\n\n";
-  total += producto.precio;
-});
+  let total = 0;
 
-mensaje += "\n\uD83D\uDCB0 TOTAL: $" + total.toLocaleString('es-CO');
-mensaje += "\n\n\uD83D\uDCCD Enviar datos de entrega.";
+  carrito.forEach(producto => {
+
+    mensaje +=
+
+    "\n\n⌚ *" + producto.nombre + "*" +
+
+    "\n💰 Precio: $" + producto.precio.toLocaleString('es-CO') +
+
+    "\n🖼️ Imagen: " + producto.imagen;
+
+    total += producto.precio;
+
+  });
+
+  mensaje +=
+
+  "\n\n━━━━━━━━━━━━━━" +
+
+  "\n💵 *TOTAL:* $" + total.toLocaleString('es-CO') +
+
+  "\n\n📍 *DATOS DE ENTREGA*" +
+
+  "\n👤 Nombre:" +
+
+  "\n📞 Teléfono:" +
+
+  "\n🏠 Dirección:" +
+
+  "\n📌 Referencia:" +
+
+  "\n\n✨ Gracias por comprar en *KP Relojes* ⌚";
 
   localStorage.setItem("kp_ultimo_total", total);
 
-  const url = "https://wa.me/573008734383?text=" + encodeURIComponent(mensaje);
+  const url =
+  "https://wa.me/573008734383?text=" +
+  encodeURIComponent(mensaje);
+
   window.open(url, "_blank");
 
   carrito = [];
   guardarCarrito();
   actualizarCarrito();
 }
+ 
