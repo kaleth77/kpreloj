@@ -41,10 +41,8 @@ function actualizarCarrito() {
         <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #444;">
           <img src="${producto.imagen}" width="60" style="border-radius:6px;"><br><br>
           <strong>${producto.nombre}</strong><br>
-          ${String.fromCodePoint(0x1F4B0)} $${producto.precio.toLocaleString('es-CO')}<br><br>
-          <button onclick="eliminarDelCarrito(${index})">
-            ${String.fromCodePoint(0x274C)} Eliminar
-          </button>
+          $${producto.precio.toLocaleString('es-CO')}<br><br>
+          <button onclick="eliminarDelCarrito(${index})">Eliminar</button>
         </div>
       `;
     });
@@ -59,48 +57,31 @@ function comprarWhatsApp() {
     return;
   }
 
-  var e = String.fromCodePoint;
-  var bolsa    = e(0x1F6D2);
-  var reloj    = e(0x231A);
-  var reloj2   = e(0x1F570);
-  var paquete  = e(0x1F4E6);
-  var dinero   = e(0x1F4B0);
-  var billete  = e(0x1F4B5);
-  var camara   = e(0x1F4F8);
-  var pin      = e(0x1F4CD);
-  var lapiz    = e(0x270D);
-  var tel      = e(0x1F4DE);
-  var casa     = e(0x1F3E0);
-  var camion   = e(0x1F69A);
-  var brillo   = e(0x2728);
-  var sep      = "——————————————";
-
-  let mensaje = bolsa + " NUEVO PEDIDO - KP RELOJES " + reloj + "\n\n"
-              + paquete + " Productos seleccionados:\n";
+  let mensaje = "\uD83D\uDED2 NUEVO PEDIDO - KP RELOJES \u231A\n\n\uD83D\uDCE6 Productos seleccionados:\n";
 
   let total = 0;
   carrito.forEach(function(producto) {
     total += producto.precio;
-    mensaje += "\n" + reloj + " " + producto.nombre
-             + "\n" + dinero + " Precio: $" + producto.precio.toLocaleString('es-CO')
-             + "\n" + camara + " Imagen: " + producto.imagen
+    mensaje += "\n\u231A " + producto.nombre
+             + "\n\uD83D\uDCB0 Precio: $" + producto.precio.toLocaleString('es-CO')
+             + "\n\uD83D\uDCF8 Imagen: " + producto.imagen
              + "\n";
   });
 
-  mensaje += "\n" + sep
-           + "\n" + billete + " TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO')
-           + "\n\n" + pin + " Datos de entrega:"
-           + "\n" + lapiz + " Nombre:"
-           + "\n" + tel + " Telefono:"
-           + "\n" + casa + " Direccion:"
-           + "\n\n" + camion + " Envio a domicilio."
-           + "\n\n" + brillo + " Gracias por elegir KP RELOJES"
-           + "\n" + reloj2 + " Calidad y elegancia en cada detalle.";
+  mensaje += "\n——————————————"
+           + "\n\uD83D\uDCB5 TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO')
+           + "\n\n\uD83D\uDCCD Datos de entrega:"
+           + "\n\u270D Nombre:"
+           + "\n\uD83D\uDCDE Telefono:"
+           + "\n\uD83C\uDFE0 Direccion:"
+           + "\n\n\uD83D\uDE9A Envio a domicilio."
+           + "\n\n\u2728 Gracias por elegir KP RELOJES"
+           + "\n\uD83D\uDD70 Calidad y elegancia en cada detalle.";
 
   localStorage.setItem("kp_ultimo_total", total);
   localStorage.setItem("kp_ultima_compra", new Date().toISOString());
 
-  const url = "https://wa.me/573008734383?text=" + encodeURIComponent(mensaje);
+  const url = "https://api.whatsapp.com/send?phone=573008734383&text=" + encodeURIComponent(mensaje);
   window.open(url, "_blank");
 
   carrito = [];
