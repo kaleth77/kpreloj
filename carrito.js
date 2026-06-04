@@ -2,16 +2,10 @@ console.log("Carrito KP conectado");
 
 let carrito = JSON.parse(localStorage.getItem("kp_carrito")) || [];
 
-/* =========================
-   GUARDAR CARRITO
-========================= */
 function guardarCarrito() {
   localStorage.setItem("kp_carrito", JSON.stringify(carrito));
 }
 
-/* =========================
-   ABRIR / CERRAR
-========================= */
 function abrirCarrito() {
   const modal = document.getElementById("modal-carrito");
   if (modal) modal.style.display = "flex";
@@ -22,118 +16,86 @@ function cerrarCarrito() {
   if (modal) modal.style.display = "none";
 }
 
-/* =========================
-   AGREGAR PRODUCTO
-========================= */
 function agregarAlCarrito(nombre, precio, imagen) {
-  carrito.push({
-    nombre,
-    precio: Number(precio),
-    imagen
-  });
-
+  carrito.push({ nombre, precio: Number(precio), imagen });
   guardarCarrito();
   actualizarCarrito();
 }
 
-/* =========================
-   ELIMINAR PRODUCTO
-========================= */
 function eliminarDelCarrito(index) {
   carrito.splice(index, 1);
   guardarCarrito();
   actualizarCarrito();
 }
 
-/* =========================
-   ACTUALIZAR CARRITO
-========================= */
 function actualizarCarrito() {
   const lista = document.getElementById("lista-carrito");
   const totalElemento = document.getElementById("total");
   const contador = document.getElementById("contador-carrito");
-
   let total = 0;
-
   if (lista) {
     lista.innerHTML = "";
-
     carrito.forEach((producto, index) => {
-
       total += producto.precio;
-
       lista.innerHTML += `
         <div style="margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid #444;">
           <img src="${producto.imagen}" width="60" style="border-radius:6px;"><br><br>
-
           <strong>${producto.nombre}</strong><br>
-
-          💰 $${producto.precio.toLocaleString('es-CO')}<br><br>
-
+          ${String.fromCodePoint(0x1F4B0)} $${producto.precio.toLocaleString('es-CO')}<br><br>
           <button onclick="eliminarDelCarrito(${index})">
-            ❌ Eliminar
+            ${String.fromCodePoint(0x274C)} Eliminar
           </button>
         </div>
       `;
     });
-
-    if (totalElemento) {
-      totalElemento.textContent = total.toLocaleString('es-CO');
-    }
+    if (totalElemento) totalElemento.textContent = total.toLocaleString('es-CO');
   }
-
-  if (contador) {
-    contador.textContent = carrito.length;
-  }
+  if (contador) contador.textContent = carrito.length;
 }
 
-/* =========================
-   WHATSAPP
-========================= */
 function comprarWhatsApp() {
   if (carrito.length === 0) {
-    alert("El carrito est\u00E1 vac\u00EDo");
+    alert("El carrito está vacío");
     return;
   }
 
-  var bolsa   = "\uD83D\uDED2"; // 🛒
-  var reloj1  = "\u231A";       // ⌚
-  var reloj2  = "\uD83D\uDD70"; // 🕰️
-  var paquete = "\uD83D\uDCE6"; // 📦
-  var dinero  = "\uD83D\uDCB0"; // 💰
-  var billete = "\uD83D\uDCB5"; // 💵
-  var camara  = "\uD83D\uDCF8"; // 📸
-  var pin     = "\uD83D\uDCCD"; // 📍
-  var lapiz   = "\u270D";       // ✍️
-  var tel     = "\uD83D\uDCDE"; // 📞
-  var casa    = "\uD83C\uDFE0"; // 🏠
-  var camion  = "\uD83D\uDE9A"; // 🚚
-  var brillo  = "\u2728";       // ✨
-  var separador = "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501";
+  var e = String.fromCodePoint;
+  var bolsa    = e(0x1F6D2);
+  var reloj    = e(0x231A);
+  var reloj2   = e(0x1F570);
+  var paquete  = e(0x1F4E6);
+  var dinero   = e(0x1F4B0);
+  var billete  = e(0x1F4B5);
+  var camara   = e(0x1F4F8);
+  var pin      = e(0x1F4CD);
+  var lapiz    = e(0x270D);
+  var tel      = e(0x1F4DE);
+  var casa     = e(0x1F3E0);
+  var camion   = e(0x1F69A);
+  var brillo   = e(0x2728);
+  var sep      = "——————————————";
 
-  let mensaje = bolsa + " NUEVO PEDIDO - KP RELOJES " + reloj1 + "\n\n"
+  let mensaje = bolsa + " NUEVO PEDIDO - KP RELOJES " + reloj + "\n\n"
               + paquete + " Productos seleccionados:\n";
 
   let total = 0;
-  carrito.forEach(producto => {
+  carrito.forEach(function(producto) {
     total += producto.precio;
-    mensaje +=
-      "\n\u2022 " + reloj1 + " " + producto.nombre +
-      "\n" + dinero + " Precio: $" + producto.precio.toLocaleString('es-CO') +
-      "\n" + camara + " Imagen: " + producto.imagen +
-      "\n";
+    mensaje += "\n" + reloj + " " + producto.nombre
+             + "\n" + dinero + " Precio: $" + producto.precio.toLocaleString('es-CO')
+             + "\n" + camara + " Imagen: " + producto.imagen
+             + "\n";
   });
 
-  mensaje +=
-    "\n" + separador +
-    "\n" + billete + " TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO') +
-    "\n\n" + pin + " Datos de entrega:" +
-    "\n" + lapiz + " Nombre:" +
-    "\n" + tel + " Tel\u00E9fono:" +
-    "\n" + casa + " Direcci\u00F3n:" +
-    "\n\n" + camion + " Env\u00EDo a domicilio." +
-    "\n\n" + brillo + " Gracias por elegir KP RELOJES" +
-    "\n" + reloj2 + " Calidad y elegancia en cada detalle.";
+  mensaje += "\n" + sep
+           + "\n" + billete + " TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO')
+           + "\n\n" + pin + " Datos de entrega:"
+           + "\n" + lapiz + " Nombre:"
+           + "\n" + tel + " Telefono:"
+           + "\n" + casa + " Direccion:"
+           + "\n\n" + camion + " Envio a domicilio."
+           + "\n\n" + brillo + " Gracias por elegir KP RELOJES"
+           + "\n" + reloj2 + " Calidad y elegancia en cada detalle.";
 
   localStorage.setItem("kp_ultimo_total", total);
   localStorage.setItem("kp_ultima_compra", new Date().toISOString());
@@ -145,3 +107,5 @@ function comprarWhatsApp() {
   guardarCarrito();
   actualizarCarrito();
 }
+
+document.addEventListener("DOMContentLoaded", actualizarCarrito);
