@@ -72,50 +72,61 @@ function actualizarCarrito() {
    COMPRAR POR WHATSAPP
 ========================= */
 function comprarWhatsApp() {
+
   if (carrito.length === 0) {
     alert("El carrito está vacío");
     return;
   }
-  let mensaje = "";
 
-mensaje += "🛍️ NUEVO PEDIDO - KP RELOJES ⌚";
-mensaje += "\n\n📦 Productos seleccionados:\n";
+  let total = 0;
 
-let total = 0;
+  // 🔥 construir mensaje en array (más estable que +=)
+  let partes = [];
 
-carrito.forEach(producto => {
+  partes.push("🛍️ NUEVO PEDIDO - KP RELOJES ⌚");
+  partes.push("\n📦 Productos seleccionados:\n");
 
-  total += producto.precio;
+  carrito.forEach(producto => {
 
-  mensaje +=
-    "\n• ⌚ " + producto.nombre +
-    "\n💰 Precio: $" + producto.precio.toLocaleString('es-CO') +
-    "\n📸 Imagen: " + producto.imagen +
-    "\n";
-});
+    total += producto.precio;
 
-mensaje +=
-"\n━━━━━━━━━━━━━━" +
-"\n💵 TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO') +
-"\n\n📍 Datos de entrega:" +
-"\n✍️ Nombre:" +
-"\n📞 Teléfono:" +
-"\n🏠 Dirección:" +
-"\n\n🚚 Envío a domicilio." +
-"\n\n✨ Gracias por elegir KP RELOJES" +
-"\n🕰️ Calidad y elegancia en cada detalle.";
-  // GUARDAR PARA EL ADMIN (IMPORTANTE)
+    partes.push(
+      "• ⌚ " + producto.nombre +
+      "\n💰 Precio: $" + producto.precio.toLocaleString('es-CO') +
+      "\n📸 Imagen: " + producto.imagen +
+      "\n"
+    );
+  });
+
+  partes.push("\n━━━━━━━━━━━━━━");
+  partes.push("\n💵 TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO'));
+
+  partes.push(
+    "\n\n📍 Datos de entrega:" +
+    "\n✍️ Nombre:" +
+    "\n📞 Teléfono:" +
+    "\n🏠 Dirección:"
+  );
+
+  partes.push(
+    "\n\n🚚 Envío a domicilio." +
+    "\n\n✨ Gracias por elegir KP RELOJES" +
+    "\n🕰️ Calidad y elegancia en cada detalle."
+  );
+
+  let mensaje = partes.join("");
+
+  // guardar para admin
   localStorage.setItem("kp_ultimo_total", total);
   localStorage.setItem("kp_ultima_compra", new Date().toISOString());
+
   const url =
     "https://wa.me/573008734383?text=" +
     encodeURIComponent(mensaje);
+
   window.open(url, "_blank");
+
   carrito = [];
   guardarCarrito();
   actualizarCarrito();
 }
-/* =========================
-   INICIAR
-========================= */
-document.addEventListener("DOMContentLoaded", actualizarCarrito);
