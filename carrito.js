@@ -76,9 +76,10 @@ function comprarWhatsApp() {
     alert("El carrito está vacío");
     return;
   }
-  let mensaje =
-"\u{1F6D2} NUEVO PEDIDO - KP RELOJES ⌚" +
-"\n\n\u{1F4E6} Productos seleccionados:";
+  let mensaje = "";
+
+mensaje += "🛍️ NUEVO PEDIDO - KP RELOJES ⌚";
+mensaje += "\n\n📦 Productos seleccionados:\n";
 
 let total = 0;
 
@@ -87,21 +88,22 @@ carrito.forEach(producto => {
   total += producto.precio;
 
   mensaje +=
-    "\n\n• ⌚ " + producto.nombre +
-    "\n\u{1F4B0} Precio: $" + producto.precio.toLocaleString('es-CO') +
-    "\n\u{1F4F8} Imagen: " + producto.imagen;
+    "\n• ⌚ " + producto.nombre +
+    "\n💰 Precio: $" + producto.precio.toLocaleString('es-CO') +
+    "\n📸 Imagen: " + producto.imagen +
+    "\n";
 });
 
 mensaje +=
-"\n\n━━━━━━━━━━━━━━" +
-"\n\u{1F4B5} TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO') +
-"\n\n\u{1F4CD} Datos de entrega:" +
-"\n\u{270D} Nombre:" +
-"\n\u{1F4DE} Teléfono:" +
-"\n\u{1F3E0} Dirección:" +
-"\n\n\u{1F69A} Envío a domicilio." +
-"\n\n\u{2728} Gracias por elegir KP RELOJES" +
-"\n\u{1F570} Calidad y elegancia en cada detalle.";
+"\n━━━━━━━━━━━━━━" +
+"\n💵 TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO') +
+"\n\n📍 Datos de entrega:" +
+"\n✍️ Nombre:" +
+"\n📞 Teléfono:" +
+"\n🏠 Dirección:" +
+"\n\n🚚 Envío a domicilio." +
+"\n\n✨ Gracias por elegir KP RELOJES" +
+"\n🕰️ Calidad y elegancia en cada detalle.";
   // GUARDAR PARA EL ADMIN (IMPORTANTE)
   localStorage.setItem("kp_ultimo_total", total);
   localStorage.setItem("kp_ultima_compra", new Date().toISOString());
