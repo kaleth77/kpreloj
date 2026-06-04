@@ -10,7 +10,7 @@ function guardarCarrito() {
 }
 
 /* =========================
-   ABRIR / CERRAR CARRITO
+   ABRIR / CERRAR
 ========================= */
 function abrirCarrito() {
   const modal = document.getElementById("modal-carrito");
@@ -88,7 +88,7 @@ function actualizarCarrito() {
 }
 
 /* =========================
-   COMPRAR POR WHATSAPP
+   WHATSAPP
 ========================= */
 function comprarWhatsApp() {
 
@@ -97,49 +97,35 @@ function comprarWhatsApp() {
     return;
   }
 
-  /* =========================
-     MENSAJE KP (SEGURO UTF-8)
-  ========================= */
+  let mensaje = "🛍️ NUEVO PEDIDO - KP RELOJES ⌚\n\n📦 Productos seleccionados:\n";
 
-let total = 0;
+  let total = 0;
 
-let mensaje =
-"\u{1F6D2} NUEVO PEDIDO - KP RELOJES \u231A" +
-"\n\n\u{1F4E6} Productos seleccionados:\n";
+  carrito.forEach(producto => {
 
-carrito.forEach(producto => {
+    total += producto.precio;
 
-  total += producto.precio;
+    mensaje +=
+      "\n• ⌚ " + producto.nombre +
+      "\n💰 Precio: $" + producto.precio.toLocaleString('es-CO') +
+      "\n📸 Imagen: " + producto.imagen +
+      "\n";
+  });
 
   mensaje +=
-    "\n\u2022 \u231A " + producto.nombre +
-    "\n\u{1F4B0} Precio: $" + producto.precio.toLocaleString('es-CO') +
-    "\n\u{1F4F8} Imagen: " + producto.imagen +
-    "\n";
-});
+    "\n━━━━━━━━━━━━━━" +
+    "\n💵 TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO') +
+    "\n\n📍 Datos de entrega:" +
+    "\n✍️ Nombre:" +
+    "\n📞 Teléfono:" +
+    "\n🏠 Dirección:" +
+    "\n\n🚚 Envío a domicilio." +
+    "\n\n✨ Gracias por elegir KP RELOJES" +
+    "\n🕰️ Calidad y elegancia en cada detalle.";
 
-mensaje +=
-"\n━━━━━━━━━━━━━━" +
-"\n\u{1F4B5} TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO') +
-"\n\n\u{1F4CD} Datos de entrega:" +
-"\n\u270D Nombre:" +
-"\n\u{1F4DE} Teléfono:" +
-"\n\u{1F3E0} Dirección:" +
-"\n\n\u{1F69A} Envío a domicilio." +
-"\n\n\u2728 Gracias por elegir KP RELOJES" +
-"\n\u{1F570} Calidad y elegancia en cada detalle.";
-
-mensaje = mensaje.join("\n");
-
-  /* =========================
-     GUARDAR PARA ADMIN
-  ========================= */
   localStorage.setItem("kp_ultimo_total", total);
   localStorage.setItem("kp_ultima_compra", new Date().toISOString());
 
-  /* =========================
-     WHATSAPP
-  ========================= */
   const url =
     "https://wa.me/573008734383?text=" +
     encodeURIComponent(mensaje);
