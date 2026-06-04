@@ -80,38 +80,32 @@ function comprarWhatsApp() {
 
   let total = 0;
 
-  // 🔥 construir mensaje en array (más estable que +=)
-  let partes = [];
+let mensaje = "";
 
-  partes.push("🛍️ NUEVO PEDIDO - KP RELOJES ⌚");
-  partes.push("\n📦 Productos seleccionados:\n");
+mensaje += "\u{1F6D2} NUEVO PEDIDO - KP RELOJES \u231A";
+mensaje += "\n\n\u{1F4E6} Productos seleccionados:\n";
 
-  carrito.forEach(producto => {
+carrito.forEach(producto => {
 
-    total += producto.precio;
+  total += producto.precio;
 
-    partes.push(
-      "• ⌚ " + producto.nombre +
-      "\n💰 Precio: $" + producto.precio.toLocaleString('es-CO') +
-      "\n📸 Imagen: " + producto.imagen +
-      "\n"
-    );
-  });
+  mensaje +=
+    "\n• \u231A " + producto.nombre +
+    "\n\u{1F4B0} Precio: $" + producto.precio.toLocaleString('es-CO') +
+    "\n\u{1F4F8} Imagen: " + producto.imagen +
+    "\n";
+});
 
-  partes.push("\n━━━━━━━━━━━━━━");
-  partes.push("\n💵 TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO'));
-
-  partes.push(
-    "\n\n📍 Datos de entrega:" +
-    "\n✍️ Nombre:" +
-    "\n📞 Teléfono:" +
-    "\n🏠 Dirección:"
-  );
-
-  partes.push(
-    "\n\n🚚 Envío a domicilio." +
-    "\n\n✨ Gracias por elegir KP RELOJES" +
-    "\n🕰️ Calidad y elegancia en cada detalle."
+mensaje +=
+"\n━━━━━━━━━━━━━━" +
+"\n\u{1F4B5} TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO') +
+"\n\n\u{1F4CD} Datos de entrega:" +
+"\n\u270D Nombre:" +
+"\n\u{1F4DE} Teléfono:" +
+"\n\u{1F3E0} Dirección:" +
+"\n\n\u{1F69A} Envío a domicilio." +
+"\n\n\u2728 Gracias por elegir KP RELOJES" +
+"\n\u{1F570} Calidad y elegancia en cada detalle.";
   );
 
   let mensaje = partes.join("");
