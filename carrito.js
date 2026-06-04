@@ -79,22 +79,28 @@ function comprarWhatsApp() {
   let mensaje = "🛒 PEDIDO KP RELOJES\n\n";
   mensaje += "📦 Productos:\n\n";
 
-  let total = 0;
+  let mensaje =
+"\u231A PEDIDO KP RELOJES" +
 
-  carrito.forEach(producto => {
+"\n\n\ud83d\udce6 Productos:\n";
 
-    total += producto.precio;
+let total = 0;
 
-    mensaje +=
-      "• " + producto.nombre +
-      "\n💰 $" + producto.precio.toLocaleString('es-CO') +
-      "\n🔗 " + producto.imagen +
-      "\n\n";
-  });
+carrito.forEach(producto => {
 
-  mensaje += "━━━━━━━━━━━━━━\n";
-  mensaje += "💰 TOTAL: $" + total.toLocaleString('es-CO');
-  mensaje += "\n\n📍 Enviar datos de entrega.";
+  total += producto.precio;
+
+  mensaje +=
+  "\n\n\u2022 " + producto.nombre +
+  "\n\ud83d\udcb0 $" + producto.precio.toLocaleString('es-CO') +
+  "\n\ud83d\udcf8 " + producto.imagen;
+});
+
+mensaje +=
+"\n\n━━━━━━━━━━━━━━" +
+"\n\ud83d\udcb5 TOTAL: $" + total.toLocaleString('es-CO') +
+"\n\n\ud83d\ude9a Enviar datos de entrega." +
+"\n\n\u2728 Gracias por comprar en KP Relojes";
 
   // GUARDA EL TOTAL PARA EL ADMIN.HTML
   localStorage.setItem("kp_ultimo_total", total);
