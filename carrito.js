@@ -123,7 +123,7 @@ carrito.forEach(producto => {
 
 mensaje.push("");
 mensaje.push("━━━━━━━━━━━━━━");
-mensaje.push("💵 TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO')");
+mensaje.push("💵 TOTAL DEL PEDIDO: $" + total.toLocaleString('es-CO'));
 mensaje.push("");
 mensaje.push("📍 Datos de entrega:");
 mensaje.push("✍️ Nombre:");
