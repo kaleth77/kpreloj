@@ -1,7 +1,9 @@
-
-function consultar(producto) {
+function consultar(producto, precioTexto) {
     let numero = "573008734383";
-    let mensaje = "Hola, quiero consultar el precio de: " + producto;
+    let mensaje = "Hola, quiero consultar por: " + producto;
+    if (precioTexto) {
+        mensaje += " (" + precioTexto + ")";
+    }
     let url = "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensaje);
     window.open(url, "_blank");
 }
