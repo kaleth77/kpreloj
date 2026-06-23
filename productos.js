@@ -24,15 +24,53 @@ function parsearCSV(texto) {
 function crearCard(producto) {
   const imgUrl = BASE_IMG + producto.imagen;
   const precioNum = parseInt(producto.precio);
+
+  // precioRebaja es opcional: si viene vacío, null o no es un número válido, no hay oferta
+  const tieneRebaja = producto.precioRebaja
+    && producto.precioRebaja.trim() !== ""
+    && !isNaN(parseInt(producto.precioRebaja))
+    && parseInt(producto.precioRebaja) > 0
+    && parseInt(producto.precioRebaja) < precioNum;
+
+  const precioRebajaNum = tieneRebaja ? parseInt(producto.precioRebaja) : null;
+  const precioCobrar = tieneRebaja ? precioRebajaNum : precioNum;
+
   const precioFormato = "$" + precioNum.toLocaleString('es-CO');
+  const precioRebajaFormato = tieneRebaja ? "$" + precioRebajaNum.toLocaleString('es-CO') : "";
+
+  const descripcion = (producto.descripcion || "").trim();
+  // ID único para el checkbox de "ver más" (basado en nombre+imagen para evitar colisiones)
+  const descId = "desc_" + (producto.nombre + producto.imagen).replace(/[^a-zA-Z0-9]/g, "");
+
+  const bloquePrecio = tieneRebaja
+    ? `<div class="precio-rebaja-wrap">
+         <span class="precio-original-tachado">${precioFormato}</span>
+         <span class="precio-valor precio-oferta">${precioRebajaFormato}</span>
+       </div>`
+    : `<div class="precio-valor">${precioFormato}</div>`;
+
+  const badgeOferta = tieneRebaja ? `<span class="badge-oferta">OFERTA</span>` : "";
+
+  const bloqueDescripcion = descripcion
+    ? (descripcion.length > 60
+        ? `<input type="checkbox" id="${descId}" class="desc-toggle-check">
+           <div class="descripcion-wrap">
+             <p class="descripcion-producto">${descripcion}</p>
+             <label for="${descId}" class="desc-ver-mas">Ver más</label>
+             <label for="${descId}" class="desc-ver-menos">Ver menos</label>
+           </div>`
+        : `<p class="descripcion-producto descripcion-corta">${descripcion}</p>`)
+    : "";
 
   return `
     <div class="card">
+      ${badgeOferta}
       <img src="${imgUrl}" onclick="abrirImagen(this)" alt="${producto.nombre}">
       <h3>${producto.nombre}</h3>
-      <div class="precio-valor">${precioFormato}</div>
+      ${bloqueDescripcion}
+      ${bloquePrecio}
       <a href="#" class="precio"
-        onclick="agregarAlCarrito('${producto.nombre.replace(/'/g, "\\'")}', ${precioNum}, '${imgUrl}'); return false;">
+        onclick="agregarAlCarrito('${producto.nombre.replace(/'/g, "\\'")}', ${precioCobrar}, '${imgUrl}'); return false;">
         🛒
       </a>
     </div>
