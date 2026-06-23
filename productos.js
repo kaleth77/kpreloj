@@ -62,6 +62,8 @@ function crearCard(producto) {
         : `<p class="descripcion-producto descripcion-corta">${descripcion}</p>`)
     : "";
 
+  const precioTextoWA = tieneRebaja ? precioRebajaFormato : precioFormato;
+
   return `
     <div class="card">
       ${badgeOferta}
@@ -69,10 +71,16 @@ function crearCard(producto) {
       <h3>${producto.nombre}</h3>
       ${bloqueDescripcion}
       ${bloquePrecio}
-      <a href="#" class="precio"
-        onclick="agregarAlCarrito('${producto.nombre.replace(/'/g, "\\'")}', ${precioCobrar}, '${imgUrl}'); return false;">
-        🛒
-      </a>
+      <div class="acciones-card">
+        <a href="#" class="precio"
+          onclick="agregarAlCarrito('${producto.nombre.replace(/'/g, "\\'")}', ${precioCobrar}, '${imgUrl}'); return false;">
+          🛒
+        </a>
+        <a href="#" class="btn-consultar"
+          onclick="consultar('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
+          Consultar
+        </a>
+      </div>
     </div>
   `;
 }
