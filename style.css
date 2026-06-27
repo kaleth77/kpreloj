@@ -379,6 +379,7 @@ header h1 {
 .desc-toggle-check:checked ~ .descripcion-wrap .descripcion-producto {
   -webkit-line-clamp: unset;
   display: block;
+  overflow: visible;
 }
 
 .desc-toggle-check:checked ~ .descripcion-wrap .desc-ver-mas {
