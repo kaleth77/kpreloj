@@ -388,3 +388,43 @@ header h1 {
 .desc-toggle-check:checked ~ .descripcion-wrap .desc-ver-menos {
   display: inline-block;
 }
+/* ===== BADGE NO DISPONIBLE ===== */
+.badge-no-disponible {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #3a3a3a;
+  color: #ff6b6b;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  z-index: 5;
+  border: 1px solid rgba(255,107,107,0.4);
+}
+
+/* ===== CARD NO DISPONIBLE (oscurecida) ===== */
+.card-no-disponible img {
+  filter: grayscale(60%) brightness(0.6);
+}
+
+.card-no-disponible:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ===== TEXTO NO DISPONIBLE (donde van los botones) ===== */
+.texto-no-disponible {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: #ff6b6b;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border: 1px solid rgba(255,107,107,0.4);
+  border-radius: 8px;
+  background: rgba(255,107,107,0.08);
+}
+
