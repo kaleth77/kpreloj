@@ -25,6 +25,9 @@ function crearCard(producto) {
   const imgUrl = BASE_IMG + producto.imagen;
   const precioNum = parseInt(producto.precio);
 
+  // noDisponible es opcional: si tiene cualquier valor no vacío (x, ., 1, etc.) se considera marcado
+  const noDisponible = producto.noDisponible && producto.noDisponible.trim() !== "";
+
   // precioRebaja es opcional: si viene vacío, null o no es un número válido, no hay oferta
   const tieneRebaja = producto.precioRebaja
     && producto.precioRebaja.trim() !== ""
@@ -50,6 +53,7 @@ function crearCard(producto) {
     : `<div class="precio-valor">${precioFormato}</div>`;
 
   const badgeOferta = tieneRebaja ? `<span class="badge-oferta">OFERTA</span>` : "";
+  const badgeNoDisponible = noDisponible ? `<span class="badge-no-disponible">NO DISPONIBLE</span>` : "";
 
   const bloqueDescripcion = descripcion
     ? (descripcion.length > 60
@@ -64,14 +68,12 @@ function crearCard(producto) {
 
   const precioTextoWA = tieneRebaja ? precioRebajaFormato : precioFormato;
 
-  return `
-    <div class="card">
-      ${badgeOferta}
-      <img src="${imgUrl}" onclick="abrirImagen(this)" alt="${producto.nombre}">
-      <h3>${producto.nombre}</h3>
-      ${bloqueDescripcion}
-      ${bloquePrecio}
-      <div class="acciones-card">
+  // Si está marcado como no disponible, no se muestran los botones de carrito/consultar
+  const bloqueAcciones = noDisponible
+    ? `<div class="acciones-card">
+        <span class="texto-no-disponible">No disponible</span>
+      </div>`
+    : `<div class="acciones-card">
         <a href="#" class="precio"
           onclick="agregarAlCarrito('${producto.nombre.replace(/'/g, "\\'")}', ${precioCobrar}, '${imgUrl}'); return false;">
           🛒
@@ -80,7 +82,17 @@ function crearCard(producto) {
           onclick="consultar('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
           Consultar
         </a>
-      </div>
+      </div>`;
+
+  return `
+    <div class="card${noDisponible ? ' card-no-disponible' : ''}">
+      ${badgeOferta}
+      ${badgeNoDisponible}
+      <img src="${imgUrl}" onclick="abrirImagen(this)" alt="${producto.nombre}">
+      <h3>${producto.nombre}</h3>
+      ${bloqueDescripcion}
+      ${bloquePrecio}
+      ${bloqueAcciones}
     </div>
   `;
 }
