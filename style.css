@@ -52,6 +52,25 @@ header a.volver {
     margin-top: 12px;
 }
 
+.btn-ofertas {
+    display: inline-block;
+    margin-top: 16px;
+    background: var(--gold);
+    color: #1a1400 !important;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 10px 22px;
+    border-radius: 30px;
+    transition: 0.3s;
+}
+
+.btn-ofertas:hover {
+    background: white;
+    color: black !important;
+    transform: scale(1.05);
+}
+
 /* ===== GRID PRODUCTOS ===== */
 .productos {
     display: grid;
@@ -472,3 +491,4 @@ a:hover {
   border-radius: 8px;
   background: rgba(255,107,107,0.08);
 }
+
