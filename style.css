@@ -62,6 +62,16 @@ header a.volver {
     margin: auto;
 }
 
+/* Tarjetas de categoria en el index: un poco mas grandes y legibles */
+.productos-categorias {
+    max-width: 1300px;
+    gap: 30px;
+}
+
+.card-categoria h3 {
+    font-size: 17px !important;
+}
+
 /* ===== TARJETAS PREMIUM ===== */
 .card {
     background: #141414;
@@ -462,4 +472,3 @@ a:hover {
   border-radius: 8px;
   background: rgba(255,107,107,0.08);
 }
-
