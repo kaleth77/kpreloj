@@ -86,6 +86,14 @@ header a.volver {
     margin: 0 auto;
 }
 
+/* Tarjetas de categoria en el index: la imagen es 1200x1500 (4:5),
+   se respeta esa proporcion para que no se corte el texto de abajo */
+.card-categoria img {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+}
+
 .card h3 {
     padding: 10px;
     font-size: 14px;
@@ -252,6 +260,11 @@ button:hover {
   .card img {
       height: 150px;
       aspect-ratio: auto;
+  }
+
+  .card-categoria img {
+      height: auto;
+      aspect-ratio: 4 / 5;
   }
 
   .card:hover{
