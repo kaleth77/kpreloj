@@ -86,8 +86,8 @@ function comprarWhatsApp() {
   // En iPhone abre la app directamente, en otros usa api.whatsapp.com
   const isIphone = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const url = isIphone
-    ? "whatsapp://send?phone=573008734383&text=" + textoEncoded
-    : "https://api.whatsapp.com/send?phone=573008734383&text=" + textoEncoded;
+    ? "whatsapp://send?phone=+573126714681&text=" + textoEncoded
+    : "https://api.whatsapp.com/send?phone=+573126714681&text=" + textoEncoded;
 
   window.open(url, "_blank");
 
