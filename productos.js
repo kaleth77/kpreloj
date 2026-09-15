@@ -67,20 +67,25 @@ function crearCard(producto) {
     : "";
 
   const precioTextoWA = tieneRebaja ? precioRebajaFormato : precioFormato;
+  const nombreEscapado = producto.nombre.replace(/'/g, "\\'");
 
-  // Si está marcado como no disponible, no se muestran los botones de carrito/consultar
-   const bloqueAcciones = noDisponible
+  // Si está marcado como no disponible, no se muestran los botones de carrito/consultar/comprar
+  const bloqueAcciones = noDisponible
     ? `<div class="acciones-card">
         <span class="texto-no-disponible">No disponible</span>
       </div>`
     : `<div class="acciones-card">
         <a href="#" class="precio"
-          onclick="agregarAlCarrito('${producto.nombre.replace(/'/g, "\\'")}', ${precioCobrar}, '${imgUrl}'); return false;">
-          🛒
+          onclick="agregarAlCarrito('${nombreEscapado}', ${precioCobrar}, '${imgUrl}'); return false;">
+          🛒 Agregar al carrito
         </a>
         <a href="#" class="btn-consultar"
-          onclick="consultar('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
-          Consultar
+          onclick="consultar('${nombreEscapado}', '${precioTextoWA}'); return false;">
+          💬 Preguntar por producto
+        </a>
+        <a href="#" class="btn-comprar"
+          onclick="agregarAlCarrito('${nombreEscapado}', ${precioCobrar}, '${imgUrl}'); comprarWhatsApp(); return false;">
+          🛍️ Comprar ya
         </a>
       </div>`;
 
