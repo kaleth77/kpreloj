@@ -80,7 +80,7 @@ function crearCard(producto) {
           🛒 Agregar al carrito
         </a>
         <a href="#" class="btn-consultar"
-          onclick="💬 Preguntar por producto('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
+          onclick="consultar('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
           💬 Preguntar por producto
         </a>
         <a href="#" class="btn-comprar"
