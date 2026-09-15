@@ -69,22 +69,18 @@ function crearCard(producto) {
   const precioTextoWA = tieneRebaja ? precioRebajaFormato : precioFormato;
 
   // Si está marcado como no disponible, no se muestran los botones de carrito/consultar
-  const bloqueAcciones = noDisponible
+   const bloqueAcciones = noDisponible
     ? `<div class="acciones-card">
         <span class="texto-no-disponible">No disponible</span>
       </div>`
     : `<div class="acciones-card">
         <a href="#" class="precio"
           onclick="agregarAlCarrito('${producto.nombre.replace(/'/g, "\\'")}', ${precioCobrar}, '${imgUrl}'); return false;">
-          Agregar al carrito
+          🛒
         </a>
         <a href="#" class="btn-consultar"
           onclick="consultar('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
-          Preguntar por producto
-        </a>
-         <a href="#" class="btn-consultar"
-          onclick="consultar('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
-          Comprar
+          Consultar
         </a>
       </div>`;
 
