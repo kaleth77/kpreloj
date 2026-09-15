@@ -365,37 +365,65 @@ a:hover {
   font-weight: 700;
 }
 
-/* ===== ACCIONES DE LA CARD (carrito + consultar) ===== */
+/* ===== ACCIONES DE LA CARD (carrito + consultar + comprar) =====
+   2 botones arriba (carrito / consultar) y el de comprar abajo, ancho completo.
+   Se usa grid en vez de flex para que nunca se salgan de la tarjeta. */
 .acciones-card {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
   padding: 0 10px 12px;
 }
 
 .acciones-card .precio {
   margin-top: 0;
-  flex-shrink: 0;
+  font-size: 12px;
+  padding: 8px 6px;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
 }
 
 .btn-consultar {
   display: inline-block;
   background: transparent;
   color: #E5B80B !important;
-  font-size: 12.5px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 8px 12px;
+  padding: 8px 6px;
   border: 1px solid rgba(229,184,11,0.5);
   border-radius: 8px;
   text-decoration: none;
   transition: 0.3s;
-  flex: 1;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
 }
 
 .btn-consultar:hover {
   background: rgba(229,184,11,0.15);
   color: #E5B80B !important;
+}
+
+.btn-comprar {
+  display: inline-block;
+  background: #E5B80B;
+  color: #1a1400 !important;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 6px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: 0.3s;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
+  grid-column: 1 / -1;
+}
+
+.btn-comprar:hover {
+  background: white;
+  color: black !important;
 }
 
 /* ===== DESCRIPCIÓN PRODUCTO ===== */
@@ -491,4 +519,3 @@ a:hover {
   border-radius: 8px;
   background: rgba(255,107,107,0.08);
 }
-
