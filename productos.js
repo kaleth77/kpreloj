@@ -76,11 +76,15 @@ function crearCard(producto) {
     : `<div class="acciones-card">
         <a href="#" class="precio"
           onclick="agregarAlCarrito('${producto.nombre.replace(/'/g, "\\'")}', ${precioCobrar}, '${imgUrl}'); return false;">
-          🛒
+          Agregar al carrito
         </a>
         <a href="#" class="btn-consultar"
           onclick="consultar('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
-          Consultar
+          Preguntar por producto
+        </a>
+         <a href="#" class="btn-consultar"
+          onclick="consultar('${producto.nombre.replace(/'/g, "\\'")}', '${precioTextoWA}'); return false;">
+          Comprar
         </a>
       </div>`;
 
