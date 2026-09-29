@@ -50,10 +50,10 @@ function crearCard(producto) {
          <span class="precio-original-tachado">${precioFormato}</span>
          <span class="precio-valor precio-oferta">${precioRebajaFormato}</span>
        </div>`
-    : <div class="precio-valor">${precioFormato}</div>;
+    : `<div class="precio-valor">${precioFormato}</div>`;
 
-  const badgeOferta = tieneRebaja ? <span class="badge-oferta">OFERTA</span> : "";
-  const badgeNoDisponible = noDisponible ? <span class="badge-no-disponible">NO DISPONIBLE</span> : "";
+  const badgeOferta = tieneRebaja ? `<span class="badge-oferta">OFERTA</span>` : "";
+  const badgeNoDisponible = noDisponible ? `<span class="badge-no-disponible">NO DISPONIBLE</span>` : "";
 
   const bloqueDescripcion = descripcion
     ? (descripcion.length > 60
@@ -63,7 +63,7 @@ function crearCard(producto) {
              <label for="${descId}" class="desc-ver-mas">Ver más</label>
              <label for="${descId}" class="desc-ver-menos">Ver menos</label>
            </div>`
-        : <p class="descripcion-producto descripcion-corta">${descripcion}</p>)
+        : `<p class="descripcion-producto descripcion-corta">${descripcion}</p>`)
     : "";
 
   const precioTextoWA = tieneRebaja ? precioRebajaFormato : precioFormato;
