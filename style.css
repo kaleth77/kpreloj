@@ -519,3 +519,139 @@ a:hover {
   border-radius: 8px;
   background: rgba(255,107,107,0.08);
 }
+
+/* ================================
+   FILTROS Y BUSCADOR DE PRODUCTOS
+   ================================ */
+
+.filtros-productos {
+    width: 90%;
+    max-width: 1200px;
+    margin: 25px auto 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* Buscador */
+.buscador-productos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #111;
+    border: 1px solid #b79b16;
+    border-radius: 10px;
+    padding: 0 15px;
+    height: 48px;
+    flex: 1;
+    min-width: 250px;
+    max-width: 500px;
+}
+
+.buscador-productos span {
+    font-size: 18px;
+}
+
+.buscador-productos input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+.buscador-productos input::placeholder {
+    color: #aaa;
+}
+
+/* Filtros de precio */
+.filtros-precio {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filtros-precio input {
+    width: 135px;
+    height: 48px;
+    box-sizing: border-box;
+    background: #111;
+    border: 1px solid #b79b16;
+    border-radius: 10px;
+    padding: 0 12px;
+    color: white;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.filtros-precio input::placeholder {
+    color: #aaa;
+}
+
+.filtros-precio input:focus,
+.buscador-productos:focus-within {
+    border-color: #d4b82c;
+    box-shadow: 0 0 10px rgba(183, 155, 22, 0.2);
+}
+
+.filtros-precio span {
+    color: #b79b16;
+    font-size: 18px;
+}
+
+/* Botón limpiar */
+#limpiarFiltros {
+    height: 48px;
+    padding: 0 18px;
+    border: 1px solid #b79b16;
+    border-radius: 10px;
+    background: transparent;
+    color: #d4b82c;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+#limpiarFiltros:hover {
+    background: #b79b16;
+    color: #000;
+}
+
+
+/* ================================
+   CELULAR
+   ================================ */
+
+@media (max-width: 600px) {
+
+    .filtros-productos {
+        width: 92%;
+        margin: 20px auto 25px;
+        gap: 10px;
+    }
+
+    .buscador-productos {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+    }
+
+    .filtros-precio {
+        width: 100%;
+    }
+
+    .filtros-precio input {
+        width: 100%;
+    }
+
+    #limpiarFiltros {
+        width: 100%;
+    }
+}
