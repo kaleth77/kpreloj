@@ -13,6 +13,42 @@
     <a class="volver" href="index.html">⬅ Volver al inicio</a>
 </header>
 
+<div class="filtros-productos">
+
+    <div class="buscador-productos">
+        <span>🔎</span>
+        <input
+            type="text"
+            id="buscarProducto"
+            placeholder="Buscar productos..."
+            autocomplete="off"
+        >
+    </div>
+
+    <div class="filtros-precio">
+        <input
+            type="number"
+            id="precioMin"
+            placeholder="Precio desde"
+            min="0"
+        >
+
+        <span>—</span>
+
+        <input
+            type="number"
+            id="precioMax"
+            placeholder="Precio hasta"
+            min="0"
+        >
+    </div>
+
+    <button id="limpiarFiltros" type="button">
+        Limpiar filtros
+    </button>
+
+</div>    
+
 <section class="productos" id="productos">
     <p style="color:#9a988f; padding:20px; grid-column:1/-1;">Cargando ofertas...</p>
 </section>
